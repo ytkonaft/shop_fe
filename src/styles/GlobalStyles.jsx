@@ -2,7 +2,7 @@ import { createGlobalStyle } from "styled-components";
 import { normalize } from "polished";
 
 const GlobalStyles = createGlobalStyle`
-
+  ${normalize()}
   html {
     box-sizing: border-box;
     font-size: 12px;

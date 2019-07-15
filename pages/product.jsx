@@ -1,5 +1,4 @@
 const Home = ({ props }) => {
-  console.log(props);
   return (
     <div>
       <h1>Product page</h1>

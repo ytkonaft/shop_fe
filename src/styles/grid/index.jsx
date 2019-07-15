@@ -1,6 +1,7 @@
-import styled, { css, CSSProp } from "styled-components";
+import styled, { css } from "styled-components";
 
 const CONTAINER_MAX_WIDTH = "1140px;";
+const getColWidth = (width = 24) => (width / 24) * 100;
 
 export const Container = styled.div`
   display: block;
@@ -16,21 +17,31 @@ export const Row = styled.div`
   flex-wrap: wrap;
 `;
 
-// TODO: Split to function
+const getColCss = ({ lg, md, sm }) => {
+  const smW = getColWidth(sm);
+  const mdW = md ? getColWidth(md) : smW;
+  const lgW = lg ? getColWidth(lg) : mdW;
+
+  return css`
+    flex: 0 0 ${lgW}%;
+    max-width: ${lgW}%;
+
+    @media screen and (max-width: ${({ theme }) => theme.breakpoints.md}px) {
+      flex: 0 0 ${mdW}%;
+      max-width: ${mdW}%;
+    }
+
+    @media screen and (max-width: ${({ theme }) => theme.breakpoints.sm}px) {
+      padding: 0;
+      flex: 0 0 ${smW}%;
+      max-width: ${smW}%;
+    }
+  `;
+};
+
 export const Col = styled.div`
   display: flex;
-  flex: 0 0 ${({ col }) => (col.lg / 24) * 100}%;
-  max-width: ${({ col }) => (col.lg / 24) * 100}%;
   padding: 0 8px;
 
-  @media ${({ theme }) => theme.breakpoints.md} {
-    flex: 0 0 ${({ col }) => (col.md / 24) * 100}%;
-    max-width: ${({ col }) => (col.md / 24) * 100}%;
-  }
-
-  @media ${({ theme }) => theme.breakpoints.sm} {
-    padding: 0;
-    flex: 0 0 ${({ col }) => (col.sm / 24) * 100}%;
-    max-width: ${({ col }) => (col.sm / 24) * 100}%;
-  }
+  ${({ col }) => getColCss(col)};
 `;

@@ -29,8 +29,7 @@ const Theme = {
     middleTop: 1400,
     top: 1500
   },
-  ms: step => modularScale(step, "1rem", "majorSecond"),
-  space: [0, 6, 12, 18, 24],
+  ms: (step) => modularScale(step, "1rem", "majorSecond"),
   breakpoints: {
     sm: 550,
     md: 992,
