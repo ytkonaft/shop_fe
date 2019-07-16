@@ -1,4 +1,19 @@
-const Home = ({ props }) => {
+import Router from "next/router";
+import { Query } from "react-apollo";
+import qql from "graphql-tag";
+
+const ALL_PRODUCTS = qql`
+  query ALL_PRODUCTS {
+    product(id: "${"asdasdasdasd"}") {
+      id
+      title
+      description
+      price
+    }
+  }
+`;
+
+const ProductPage = ({ props }) => {
   return (
     <div>
       <h1>Product page</h1>
@@ -12,4 +27,11 @@ const Home = ({ props }) => {
   );
 };
 
-export default Home;
+ProductPage.getInitialProps = async ({ query }) => {
+  if (!query.id) {
+    Router.push("/");
+  }
+  return {};
+};
+
+export default ProductPage;

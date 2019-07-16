@@ -3,7 +3,7 @@ import initApollo from "./init-apollo";
 import Head from "next/head";
 import { getDataFromTree } from "react-apollo";
 
-export default (App) => {
+export default App => {
   return class Apollo extends React.Component {
     static displayName = "withApollo(App)";
     static async getInitialProps(ctx) {
@@ -42,7 +42,7 @@ export default (App) => {
 
       // Extract query data from the Apollo store
       const apolloState = apollo.cache.extract();
-      console.log(appProps);
+
       return {
         ...appProps,
         apolloState
@@ -55,7 +55,6 @@ export default (App) => {
     }
 
     render() {
-      console.log(this.props);
       return <App {...this.props} apolloClient={this.apolloClient} />;
     }
   };
