@@ -1,26 +1,41 @@
 import Link from "next/link";
+import styled from "styled-components";
+
+const StyledNav = styled.nav`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: flex-end;
+  align-items: center;
+`;
+
+const StyledLink = styled.a`
+  color: #fff;
+  cursor: pointer;
+  display: block;
+  margin: 0 10px;
+  font-size: ${({ theme: { ms } }) => ms(1.2)};
+  text-transform: uppercase;
+`;
 
 const Navigation = () => (
-  <div>
+  <StyledNav alignItems="center">
     <Link href="/">
-      <a>home</a>
-    </Link>
-    <Link href="/cart">
-      <a>cart</a>
+      <StyledLink>Home</StyledLink>
     </Link>
     <Link href="/category">
-      <a>category</a>
+      <StyledLink>categories</StyledLink>
     </Link>
     <Link href="/search">
-      <a>search</a>
+      <StyledLink>search</StyledLink>
     </Link>
     <Link href="/profile">
-      <a>profile</a>
+      <StyledLink>profile</StyledLink>
     </Link>
-    <Link href="/product">
-      <a>product</a>
+    <Link href="/cart">
+      <StyledLink>cart</StyledLink>
     </Link>
-  </div>
+  </StyledNav>
 );
 
 export default Navigation;

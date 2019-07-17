@@ -1,15 +1,13 @@
-const Home = ({ props }) => {
+import Button from "components/Button";
+import { Container } from "styles/grid";
+
+const CartPage = ({ props }) => {
   return (
-    <div>
-      <h1>Cart page</h1>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, officia!
-        Unde illum inventore vero laborum maiores, fuga sint optio tenetur
-        cupiditate illo! Consequuntur corrupti maxime voluptatum nesciunt fuga
-        facilis voluptatibus.
-      </p>
-    </div>
+    <Container>
+      <Button>Main</Button>
+      <Button active={true}>Main</Button>
+    </Container>
   );
 };
 
-export default Home;
+export default CartPage;

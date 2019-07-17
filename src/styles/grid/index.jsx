@@ -1,19 +1,21 @@
 import styled, { css } from "styled-components";
 
-const CONTAINER_MAX_WIDTH = "1140px;";
+const CONTAINER_MAX_WIDTH = "1140px";
+const GUTTER_WIDTH = "8px";
+
 const getColWidth = (width = 24) => (width / 24) * 100;
 
 export const Container = styled.div`
   display: block;
   width: 100%;
   margin: 0 auto;
-  padding: 0 8px;
+  padding: 0 ${({ gutterOff }) => (gutterOff ? "0" : GUTTER_WIDTH)};
   max-width: ${({ fuild }) => (fuild ? "100%" : CONTAINER_MAX_WIDTH)};
 `;
 
 export const Row = styled.div`
   display: flex;
-  margin: 0 -8px;
+  margin: 0 -${GUTTER_WIDTH};
   flex-wrap: wrap;
 `;
 
@@ -41,7 +43,7 @@ const getColCss = ({ lg, md, sm }) => {
 
 export const Col = styled.div`
   display: flex;
-  padding: 0 8px;
-
+  padding: 0 ${GUTTER_WIDTH};
+  align-items: ${({ alignItems }) => alignItems || "flex-start"};
   ${({ col }) => getColCss(col)};
 `;

@@ -1,6 +1,7 @@
 import Router from "next/router";
 import { Query } from "react-apollo";
 import qql from "graphql-tag";
+import { Container } from "styles/grid";
 
 const ALL_PRODUCTS = qql`
   query ALL_PRODUCTS {
@@ -15,7 +16,7 @@ const ALL_PRODUCTS = qql`
 
 const ProductPage = ({ props }) => {
   return (
-    <div>
+    <Container>
       <h1>Product page</h1>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, officia!
@@ -23,7 +24,7 @@ const ProductPage = ({ props }) => {
         cupiditate illo! Consequuntur corrupti maxime voluptatum nesciunt fuga
         facilis voluptatibus.
       </p>
-    </div>
+    </Container>
   );
 };
 

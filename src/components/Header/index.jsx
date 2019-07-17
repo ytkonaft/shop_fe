@@ -18,28 +18,43 @@ Router.events.on("routeChangeError", () => {
   NProgress.done();
 });
 
-const RedCol = styled(Col)`
-  background: red;
+const StyledHeader = styled.header`
+  background: #333;
+  height: 50px;
 `;
-const GreenCol = styled(Col)`
-  background: green;
+
+const StyledContainer = styled(Container)`
+  height: 100%;
+`;
+
+const StyledRow = styled(Row)`
+  height: 100%;
+`;
+
+const StyledLogo = styled.h1`
+  color: #333;
+  background: #fff;
+  transform: skew(0, 15deg) translateY(40%);
+  margin: 0;
+  font-size: ${({ theme: { ms } }) => ms(6)};
+  text-transform: uppercase;
+  padding: 3px 0;
 `;
 
 const Header = () => {
   return (
-    <Container>
-      <Row>
-        <RedCol col={{ sm: 24, md: 12, lg: 6 }}>
-          <h1>Logo</h1>
-
-          <button>Login</button>
-          <button>Sign up</button>
-        </RedCol>
-        <GreenCol col={{ md: 12, lg: 18 }}>
-          <Navigation />
-        </GreenCol>
-      </Row>
-    </Container>
+    <StyledHeader>
+      <StyledContainer>
+        <StyledRow>
+          <Col col={{ sm: 24, md: 12, lg: 6 }}>
+            <StyledLogo>Logo</StyledLogo>
+          </Col>
+          <Col col={{ md: 12, lg: 18 }}>
+            <Navigation />
+          </Col>
+        </StyledRow>
+      </StyledContainer>
+    </StyledHeader>
   );
 };
 

@@ -1,6 +1,8 @@
-const Home = ({ props }) => {
+import { Container } from "styles/grid";
+
+const SearchPage = ({ props }) => {
   return (
-    <div>
+    <Container>
       <h1>Search page</h1>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, officia!
@@ -8,8 +10,8 @@ const Home = ({ props }) => {
         cupiditate illo! Consequuntur corrupti maxime voluptatum nesciunt fuga
         facilis voluptatibus.
       </p>
-    </div>
+    </Container>
   );
 };
 
-export default Home;
+export default SearchPage;
