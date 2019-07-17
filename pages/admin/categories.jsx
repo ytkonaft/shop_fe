@@ -3,7 +3,7 @@ import { AdminLayout } from "layouts";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
 const AddProduct = ({ props }) => {
-  const validate = (values) => {
+  const validate = values => {
     let errors = {};
     if (!values.title) {
       errors.title = "Required";
@@ -20,7 +20,7 @@ const AddProduct = ({ props }) => {
 
   return (
     <AdminLayout>
-      <h1>Add product</h1>
+      <h1>Add category</h1>
       <Formik
         initialValues={{ title: "", description: "", price: 0.0 }}
         validate={validate}

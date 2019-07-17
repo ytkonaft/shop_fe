@@ -19,7 +19,7 @@ Router.events.on("routeChangeError", () => {
 });
 
 const StyledHeader = styled.header`
-  background: #333;
+  background: ${({ theme }) => theme.colors.dark};
   height: 50px;
 `;
 

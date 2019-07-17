@@ -2,9 +2,9 @@ import { modularScale } from "polished";
 
 const Theme = {
   colors: {
-    porcelain: "#F3F7F7",
+    purple: "rgb(174, 0, 255)",
     white: "#FFFFFF",
-    black: "#000000",
+    dark: "#333",
     status: {
       success: "#4DD47A",
       error: "#F24040"
@@ -29,7 +29,7 @@ const Theme = {
     middleTop: 1400,
     top: 1500
   },
-  ms: (step) => modularScale(step, "1rem", "majorSecond"),
+  ms: step => modularScale(step, "1rem", "majorSecond"),
   breakpoints: {
     sm: 550,
     md: 992,

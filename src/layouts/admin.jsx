@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import Link from "next/link";
 import { Container, Row, Col } from "styles/grid";
+import SidebarMenu from "components/SidebarMenu";
 
 const StyledAdminLayout = styled.div`
   background: ${({ theme }) => theme.colors.porcelain};
@@ -16,39 +16,28 @@ const AdminPageContent = styled(Col)`
   flex-direction: column;
 `;
 
+const adminMenu = [
+  {
+    href: "/admin",
+    title: "Admin Profile"
+  },
+  {
+    href: "/admin/products",
+    title: "Products"
+  },
+  {
+    href: "/admin/categories",
+    title: "Categories"
+  }
+];
+
 export const AdminLayout = ({ children }) => {
   return (
     <StyledAdminLayout>
       <Container>
         <Row>
           <Col col={{ sm: 24, md: 6 }}>
-            <ul>
-              <li>
-                <Link href="/admin">
-                  <a>Admin Profile</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/admin/products">
-                  <a>Products</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/admin/categories">
-                  <a>Categories</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/admin/add-category">
-                  <a>Add category</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/admin/add-product">
-                  <a>Add product</a>
-                </Link>
-              </li>
-            </ul>
+            <SidebarMenu pages={adminMenu} />
           </Col>
           <AdminPageContent col={{ sm: 24, md: 18 }}>
             {children}
