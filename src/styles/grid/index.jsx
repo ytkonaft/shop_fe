@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-const CONTAINER_MAX_WIDTH = "1140px";
+const CONTAINER_MAX_WIDTH = "1360px";
 const GUTTER_WIDTH = "8px";
 
 const getColWidth = (width = 24) => (width / 24) * 100;

@@ -35,6 +35,9 @@ const Navigation = () => (
     <Link href="/cart">
       <StyledLink>cart</StyledLink>
     </Link>
+    <Link href="/admin">
+      <StyledLink>admin</StyledLink>
+    </Link>
   </StyledNav>
 );
 

@@ -34,11 +34,30 @@ const StyledRow = styled(Row)`
 const StyledLogo = styled.h1`
   color: #333;
   background: #fff;
-  transform: skew(0, 15deg) translateY(40%);
+  transform: skew(0, -10deg) translateY(30%);
   margin: 0;
   font-size: ${({ theme: { ms } }) => ms(6)};
   text-transform: uppercase;
   padding: 3px 0;
+  z-index: 5;
+  &:after,
+  &:before {
+    position: absolute;
+    content: "";
+    background: #fff;
+    width: 30%;
+    height: 100%;
+    top: 0;
+    z-index: -2;
+  }
+  &:after {
+    right: 0;
+    transform: skew(0, 20deg) translateY(-11%);
+  }
+  &:before {
+    left: 0;
+    transform: skew(0, 20deg) translateY(11%);
+  }
 `;
 
 const Header = () => {
