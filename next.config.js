@@ -8,6 +8,7 @@ module.exports = {
         ...config.resolve.alias,
         src: path.resolve(__dirname, "src/"),
         components: path.resolve(__dirname, "src/components/"),
+        containers: path.resolve(__dirname, "src/containers/"),
         layouts: path.resolve(__dirname, "src/layouts/"),
         styles: path.resolve(__dirname, "src/styles/"),
         hooks: path.resolve(__dirname, "src/hooks/"),
