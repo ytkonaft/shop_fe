@@ -1,9 +1,9 @@
 import { Query } from "react-apollo";
-import qql from "graphql-tag";
+import gql from "graphql-tag";
 import { Container, Row, Col } from "styles/grid";
 import Product from "components/Product";
 
-const ALL_PRODUCTS = qql`
+const ALL_PRODUCTS = gql`
   query ALL_PRODUCTS {
     products {
       id

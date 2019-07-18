@@ -1,6 +1,7 @@
 import { createUploadLink } from "apollo-upload-client";
 import { ApolloClient } from "apollo-client";
 import { InMemoryCache } from "apollo-cache-inmemory";
+import fetch from "isomorphic-unfetch";
 import { endpoint } from "../../config";
 
 let apolloClient = null;

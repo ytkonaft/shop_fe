@@ -1,29 +1,37 @@
 import Router from "next/router";
 import { Query } from "react-apollo";
-import qql from "graphql-tag";
+import gql from "graphql-tag";
 import { Container } from "styles/grid";
 
-const ALL_PRODUCTS = qql`
-  query ALL_PRODUCTS {
-    product(id: "${"asdasdasdasd"}") {
+const SINGLE_PRODUCT = gql`
+  query SINGLE_PRODUCT($id: ID!) {
+    product(where: { id: $id }) {
       id
       title
       description
       price
+      image
     }
   }
 `;
 
-const ProductPage = ({ props }) => {
+const ProductPage = ({ id }) => {
   return (
     <Container>
-      <h1>Product page</h1>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, officia!
-        Unde illum inventore vero laborum maiores, fuga sint optio tenetur
-        cupiditate illo! Consequuntur corrupti maxime voluptatum nesciunt fuga
-        facilis voluptatibus.
-      </p>
+      <Query query={SINGLE_PRODUCT} variables={{ id }}>
+        {({ loading, error, data: { product } }) => {
+          if (loading) return "Loading...";
+          if (error) return `Error! ${error.message}`;
+          return (
+            <>
+              <h1>Product {product.title}</h1>
+              <img src={product.image} alt="" />
+              <p>{product.description}</p>
+              <strong>{product.price}</strong>
+            </>
+          );
+        }}
+      </Query>
     </Container>
   );
 };
@@ -31,8 +39,9 @@ const ProductPage = ({ props }) => {
 ProductPage.getInitialProps = async ({ query }) => {
   if (!query.id) {
     Router.push("/");
+    return {};
   }
-  return {};
+  return { id: query.id };
 };
 
 export default ProductPage;
