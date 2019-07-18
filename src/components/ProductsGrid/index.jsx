@@ -10,6 +10,7 @@ const ALL_PRODUCTS = qql`
       title
       description
       price
+      image
     }
   }
 `;
@@ -22,8 +23,7 @@ const ProductsGrid = ({ productsInRow = 6 }) => {
           {({ data, error, loading }) => {
             if (error) return error.message;
             if (loading) return "Loading...";
-
-            return data.products.map(product => (
+            return data.products.map((product) => (
               <Col col={{ md: productsInRow }} key={product.id}>
                 <Product data={product} />
               </Col>

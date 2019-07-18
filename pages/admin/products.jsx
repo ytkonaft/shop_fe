@@ -11,8 +11,14 @@ const CREATE_PRODUCT = gql`
     $title: String!
     $description: String!
     $price: Float!
+    $image: Upload!
   ) {
-    createProduct(title: $title, description: $description, price: $price) {
+    createProduct(
+      title: $title
+      description: $description
+      price: $price
+      image: $image
+    ) {
       id
     }
   }
@@ -23,7 +29,7 @@ const StyledLabel = styled.label`
   margin-top: 10px;
 `;
 
-const validate = values => {
+const validate = (values) => {
   let errors = {};
   if (!values.title) {
     errors.title = "Required";
@@ -38,16 +44,18 @@ const AddProduct = ({ client }) => {
   });
 
   const handleSubmit = async (
-    { title, description, price },
+    { title, description, price, image },
     { setSubmitting }
   ) => {
     try {
+      console.log(image);
       const { data } = await client.mutate({
         mutation: CREATE_PRODUCT,
         variables: {
           title,
           description,
-          price
+          price,
+          image
         }
       });
       setStatus({
@@ -70,8 +78,8 @@ const AddProduct = ({ client }) => {
         onSubmit={handleSubmit}
       >
         {({ isSubmitting, setFieldValue }) => {
-          const handleUpload = e => {
-            setFieldValue("avatar", e.currentTarget.files[0]);
+          const handleUpload = (e) => {
+            setFieldValue("image", e.currentTarget.files[0]);
           };
           return (
             <Form>

@@ -7,6 +7,10 @@ const StyledProduct = styled.div`
   diplay: flex;
 `;
 
+const ProductImage = styled.img`
+  max-width: 100%;
+`;
+
 const Product = ({ data }) => {
   if (!data) return null;
   const { title, description, price, id } = data;
@@ -19,7 +23,10 @@ const Product = ({ data }) => {
         }}
       >
         <a>
-          <img src="https://via.placeholder.com/150" alt="" />
+          <ProductImage
+            src={data.image || "https://via.placeholder.com/150"}
+            alt=""
+          />
         </a>
       </Link>
       <h3>
