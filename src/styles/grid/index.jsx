@@ -27,7 +27,7 @@ const getColCss = ({ lg, md, sm }) => {
   return css`
     flex: 0 0 ${lgW}%;
     max-width: ${lgW}%;
-
+    flex-direction: column;
     @media screen and (max-width: ${({ theme }) => theme.breakpoints.md}px) {
       flex: 0 0 ${mdW}%;
       max-width: ${mdW}%;

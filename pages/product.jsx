@@ -1,7 +1,12 @@
 import Router from "next/router";
+import styled from "styled-components";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
-import { Container } from "styles/grid";
+import { Container, Row, Col } from "styles/grid";
+
+const StyledImg = styled.img`
+  max-width: 100%;
+`;
 
 const SINGLE_PRODUCT = gql`
   query SINGLE_PRODUCT($id: ID!) {
@@ -23,12 +28,18 @@ const ProductPage = ({ id }) => {
           if (loading) return "Loading...";
           if (error) return `Error! ${error.message}`;
           return (
-            <>
-              <h1>Product {product.title}</h1>
-              <img src={product.image} alt="" />
-              <p>{product.description}</p>
-              <strong>{product.price}</strong>
-            </>
+            <Container>
+              <h1>{product.title}</h1>
+              <Row>
+                <Col col={{ md: 6 }}>
+                  <StyledImg src={product.image} alt="" />
+                </Col>
+                <Col col={{ md: 18 }}>
+                  <p>{product.description}</p>
+                  <strong>{product.price}</strong>
+                </Col>
+              </Row>
+            </Container>
           );
         }}
       </Query>

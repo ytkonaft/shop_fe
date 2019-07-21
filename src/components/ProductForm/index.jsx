@@ -36,7 +36,7 @@ const validate = values => {
   return errors;
 };
 
-const ProductForm = () => {
+const ProductForm = ({ client }) => {
   const [requestStatus, setStatus] = useState({
     error: null,
     sucess: null

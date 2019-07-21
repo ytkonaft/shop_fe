@@ -1,4 +1,4 @@
-import { withApollo } from "react-apollo";
+import { Query } from "react-apollo";
 import gql from "graphql-tag";
 
 const ALL_PRODUCTS = gql`
@@ -13,25 +13,18 @@ const ALL_PRODUCTS = gql`
   }
 `;
 
-const ProductsContainer = C => {
-  const ProductsComponent = (...props) => <C {...props} />;
-  ProductsComponent.getInitialProps = async ctx => {
-    const response = await ctx.apolloClient.query({ query: ALL_PRODUCTS });
-
-    console.log(response);
-
-    let componentProps = {};
-    if (C.getInitialProps) {
-      componentProps = await C.getInitialProps(ctx);
-    }
-
-    return {
-      products: response.data.products,
-      ...componentProps
-    };
-  };
-
-  return ProductsComponent;
+const ProductsContainer = ({ ProductItm }) => {
+  return (
+    <Query query={ALL_PRODUCTS}>
+      {({ data, error, loading }) => {
+        if (error) return error.message;
+        if (loading) return "Loading...";
+        return data.products.map((product, indx) => (
+          <ProductItm key={indx} data={product} />
+        ));
+      }}
+    </Query>
+  );
 };
 
 export default ProductsContainer;

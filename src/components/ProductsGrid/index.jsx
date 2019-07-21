@@ -1,35 +1,18 @@
-import { Query } from "react-apollo";
-import gql from "graphql-tag";
 import { Container, Row, Col } from "styles/grid";
-import Product from "components/Product";
+import ProductCard from "components/ProductCard";
+import Products from "containers/Products";
 
-const ALL_PRODUCTS = gql`
-  query ALL_PRODUCTS {
-    products {
-      id
-      title
-      description
-      price
-      image
-    }
-  }
-`;
+const ProductItm = ({ data }) => (
+  <Col col={{ md: 6 }}>
+    <ProductCard data={data} />
+  </Col>
+);
 
-const ProductsGrid = ({ productsInRow = 6 }) => {
+const ProductsGrid = () => {
   return (
     <Container fuild>
       <Row>
-        <Query query={ALL_PRODUCTS}>
-          {({ data, error, loading }) => {
-            if (error) return error.message;
-            if (loading) return "Loading...";
-            return data.products.map((product) => (
-              <Col col={{ md: productsInRow }} key={product.id}>
-                <Product data={product} />
-              </Col>
-            ));
-          }}
-        </Query>
+        <Products ProductItm={ProductItm} />
       </Row>
     </Container>
   );

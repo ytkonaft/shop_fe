@@ -1,6 +1,7 @@
 const path = require("path");
+const withSourceMaps = require("@zeit/next-source-maps");
 
-module.exports = {
+const NextConfig = {
   distDir: "./dist",
   webpack: (config, { dev }) => {
     config.resolve = {
@@ -22,10 +23,7 @@ module.exports = {
       {
         test: /\.(js | jsx)?$/,
         loader: "stylelint-custom-processor-loader",
-        exclude: /node_modules/,
-        options: {
-          emitWarning: true
-        }
+        exclude: /node_modules/
       },
       {
         test: /\.mjs$/,
@@ -37,3 +35,5 @@ module.exports = {
     return config;
   }
 };
+
+module.exports = withSourceMaps(NextConfig);
