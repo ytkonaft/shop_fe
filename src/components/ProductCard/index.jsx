@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Link from "next/link";
-import {Button} from "components/Button"
+import { Button } from "components/Button";
 
 const StyledProduct = styled.div`
   width: 100%;
@@ -9,7 +9,8 @@ const StyledProduct = styled.div`
   padding: 5px;
   text-align: center;
   margin-bottom: 18px;
-  border: 1px solid #333;
+  border-radius: 3px;
+  border: 1px solid ${({ theme }) => theme.colors.gray};
 `;
 
 const ProductImageWrp = styled.a`
@@ -26,9 +27,12 @@ const ProductImage = styled.img`
 
 const ProductCard = ({ data }) => {
   if (!data) return null;
-  const { title, 
-    // description, 
-    price, id } = data;
+  const {
+    title,
+    // description,
+    price,
+    id
+  } = data;
   return (
     <StyledProduct>
       <Link
@@ -57,8 +61,8 @@ const ProductCard = ({ data }) => {
       {/* <p>{description}</p> */}
       <b>{price}</b>
       <div>
-      <Button>like</Button> <Button>Add</Button>
-
+        <Button btnType="default">like</Button>{" "}
+        <Button btnType="success">Add</Button>
       </div>
     </StyledProduct>
   );

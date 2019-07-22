@@ -1,13 +1,44 @@
-import { useState } from "react";
+import { useState, useEffect, memo } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { withApollo } from "react-apollo";
 import gql from "graphql-tag";
-import {Button} from "components/Button";
+import { Button } from "components/Button";
 import styled from "styled-components";
 
 const StyledLabel = styled.label`
   display: block;
   margin-top: 10px;
+`;
+
+const RemoveBtn = styled.button`
+  width: ${({ theme }) => theme.ms(5)};
+  height: ${({ theme }) => theme.ms(5)};
+  padding: 0;
+  display: flex;
+  position: absolute;
+  top: 0;
+  right: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: none;
+  transform: translateX(25%) translateY(-25%);
+  background: ${({ theme }) => theme.colors.error};
+  color: ${({ theme }) => theme.colors.white};
+`;
+
+const StyledThumb = styled.img`
+  max-width: 100%;
+  max-height: 100%;
+`;
+
+const ThumbWrp = styled.div`
+  border-radius: 3px;
+  border: 1px solid ${({ theme }) => theme.colors.gray};
+  width: 150px;
+  height: 150px;
+  text-align: center;
+  position: relative;
 `;
 
 const CREATE_PRODUCT = gql`
@@ -27,6 +58,33 @@ const CREATE_PRODUCT = gql`
     }
   }
 `;
+
+const ImageThumb = memo(({ image, removeImage }) => {
+  const [thumb, setThumb] = useState(null);
+
+  useEffect(() => {
+    imageThumb(image);
+  }, [image]);
+
+  const imageThumb = value => {
+    if (typeof value === "string" || value instanceof String) {
+      return setThumb(value);
+    } else {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setThumb(reader.result);
+      };
+      reader.readAsDataURL(value);
+    }
+  };
+  console.log("azaza");
+  return (
+    <ThumbWrp>
+      <StyledThumb src={thumb} />
+      <RemoveBtn onClick={removeImage}>x</RemoveBtn>
+    </ThumbWrp>
+  );
+});
 
 const validate = values => {
   let errors = {};
@@ -67,27 +125,38 @@ const ProductForm = ({ client, productData }) => {
     }
   };
 
-  const initialValues ={
-     title: productData ? productData.title : "", 
-     description: productData ? productData.description : "",
-     price: productData ? productData.price : 0.0,
-  }
-  
+  const initialValues = {
+    title: "",
+    description: "",
+    price: 0.0,
+    image: null
+  };
+
   return (
     <div>
       <Formik
-        initialValues={initialValues}
+        initialValues={productData || initialValues}
         validate={validate}
         onSubmit={handleSubmit}
       >
-        {({ isSubmitting, setFieldValue }) => {
+        {({ isSubmitting, setFieldValue, values }) => {
           const handleUpload = e => {
             setFieldValue("image", e.currentTarget.files[0]);
+          };
+          const handleRemoveImage = () => {
+            setFieldValue("image", null);
           };
           return (
             <Form>
               <StyledLabel>Picture</StyledLabel>
-              <input type="file" onChange={handleUpload} />
+              {values.image ? (
+                <ImageThumb
+                  image={values.image}
+                  removeImage={handleRemoveImage}
+                />
+              ) : (
+                <input type="file" onChange={handleUpload} />
+              )}
               <div>
                 <StyledLabel>Title</StyledLabel>
                 <Field type="text" name="title" />
@@ -104,7 +173,12 @@ const ProductForm = ({ client, productData }) => {
                 <ErrorMessage name="price" component="div" />
               </div>
               <div>
-                <Button type="submit" active={true} disabled={isSubmitting}>
+                <Button
+                  btnType="default"
+                  type="submit"
+                  active={true}
+                  disabled={isSubmitting}
+                >
                   {isSubmitting ? "Sending..." : "Submit"}
                 </Button>
               </div>
