@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { withApollo } from "react-apollo";
 import gql from "graphql-tag";
-import Button from "components/Button";
+import {Button} from "components/Button";
 import styled from "styled-components";
 
 const StyledLabel = styled.label`

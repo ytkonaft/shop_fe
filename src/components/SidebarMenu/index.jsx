@@ -20,7 +20,7 @@ const StyledLink = styled.a`
   cursor: pointer;
 
   &:hover {
-    color: ${({ theme }) => theme.colors.purple};
+    color: ${({ theme }) => theme.colors.main};
   }
 `;
 

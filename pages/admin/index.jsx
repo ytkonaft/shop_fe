@@ -1,4 +1,4 @@
-import Button from "components/Button";
+import {Button} from "components/Button";
 import { AdminLayout } from "layouts";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 

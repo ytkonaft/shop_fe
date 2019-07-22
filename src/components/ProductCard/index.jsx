@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Link from "next/link";
-import Button from "components/Button"
+import {Button} from "components/Button"
 
 const StyledProduct = styled.div`
   width: 100%;
