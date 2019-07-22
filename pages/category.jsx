@@ -1,6 +1,6 @@
 import { Container } from "styles/grid";
 
-const CategoriesPage = ({ props }) => {
+const CategoriesPage = () => {
   return (
     <Container>
       <h1>Categories page</h1>

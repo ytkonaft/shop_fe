@@ -40,8 +40,9 @@ const StyledLogo = styled.h1`
   text-transform: uppercase;
   padding: 3px 0;
   z-index: 5;
-  &:after,
-  &:before {
+
+  &::after,
+  &::before {
     position: absolute;
     content: "";
     background: #fff;
@@ -50,11 +51,13 @@ const StyledLogo = styled.h1`
     top: 0;
     z-index: -2;
   }
-  &:after {
+
+  &::after {
     right: 0;
     transform: skew(0, 20deg) translateY(-11%);
   }
-  &:before {
+
+  &::before {
     left: 0;
     transform: skew(0, 20deg) translateY(11%);
   }

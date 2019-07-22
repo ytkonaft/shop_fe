@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import ProductForm from "components/ProductForm";
+// import ProductForm from "components/ProductForm";
 import Products from "containers/Products";
 import Button from "components/Button";
 import { AdminLayout } from "layouts";
@@ -9,6 +9,7 @@ const ProductRow = styled(Row)`
   padding-top: 25px;
   padding-bottom: 25px;
   border-bottom: 1px solid #333;
+
   &:last-child {
     border: none;
   }
@@ -43,7 +44,7 @@ const ProductItm = ({ data }) => {
   );
 };
 
-const AddProduct = ({ client }) => {
+const AddProduct = () => {
   return (
     <AdminLayout>
       <div>

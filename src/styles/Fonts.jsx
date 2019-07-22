@@ -1,12 +1,13 @@
 import { createGlobalStyle } from "styled-components";
 
 const LocalFonts = createGlobalStyle`
-   @font-face {
-       font-family: 'Roboto';
-       src: url('/static/fonts/RobotoRegular.ttf') format('truetype'),
-            url('/static/fonts/RobotoRegular.otf') format('opentype');
-       font-display: block;
-   } 
+  @font-face {
+    font-family: 'Roboto';
+    src:
+      url('/static/fonts/RobotoRegular.ttf') format('truetype'),
+      url('/static/fonts/RobotoRegular.otf') format('opentype');
+    font-display: block;
+  }
 `;
 
 const FontLoader = ({ googleFonts }) => {
@@ -17,7 +18,7 @@ const FontLoader = ({ googleFonts }) => {
 
       acc.push(family + (weights && `:${weights}`));
       return acc;
-    }, [])
+    }, []) 
     .join("|");
 
   return (

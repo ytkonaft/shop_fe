@@ -1,6 +1,6 @@
 import { Container } from "styles/grid";
 
-const SearchPage = ({ props }) => {
+const SearchPage = () => {
   return (
     <Container>
       <h1>Search page</h1>

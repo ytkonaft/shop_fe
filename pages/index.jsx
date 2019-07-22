@@ -7,7 +7,7 @@ const StyledContainer = styled(Container)`
   padding-bottom: 40px;
 `;
 
-const Home = ({ props }) => {
+const Home = () => {
   return (
     <StyledContainer gutterOff>
       <ProductsGrid />

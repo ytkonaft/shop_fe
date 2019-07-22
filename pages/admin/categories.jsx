@@ -2,7 +2,7 @@ import Button from "components/Button";
 import { AdminLayout } from "layouts";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
-const AddProduct = ({ props }) => {
+const AddProduct = () => {
   const validate = values => {
     let errors = {};
     if (!values.title) {

@@ -6,16 +6,19 @@ const StyledMenu = styled.ul`
   padding: 0;
   margin: 0;
 `;
+
 const StyledMenuItem = styled.li`
   padding: 0;
   margin: 0;
   list-style: none;
 `;
+
 const StyledLink = styled.a`
   text-decoration: ${({ active }) => (active ? "underline" : "none")};
   font-size: ${({ theme: { ms } }) => ms(1.2)};
   color: ${({ theme }) => theme.colors.dark};
   cursor: pointer;
+
   &:hover {
     color: ${({ theme }) => theme.colors.purple};
   }

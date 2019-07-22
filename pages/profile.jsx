@@ -1,5 +1,5 @@
 import { Container } from "styles/grid";
-const ProfilePage = ({ props }) => {
+const ProfilePage = () => {
   return (
     <Container>
       <h1>Profile page</h1>

@@ -14,7 +14,8 @@ const create = (initialState) => {
     connectToDevTools: isBrowser,
     ssrMode: !isBrowser,
     link: createUploadLink({ uri: endpoint }),
-    cache: new InMemoryCache().restore(initialState || {})
+    cache: new InMemoryCache().restore(initialState || {}),
+    fetch: fetch
   });
 };
 

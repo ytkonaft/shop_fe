@@ -9,7 +9,6 @@ const StyledAdminLayout = styled.div`
   display: flex;
   flex: 1 1 100%;
   flex-direction: column;
-  bacground: red;
 `;
 
 const AdminPageContent = styled(Col)`

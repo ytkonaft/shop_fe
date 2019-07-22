@@ -1,10 +1,13 @@
 import styled from "styled-components";
 import Link from "next/link";
+import Button from "components/Button"
 
 const StyledProduct = styled.div`
   width: 100%;
-  diplay: flex;
+  display: flex;
+  flex-direction: column;
   padding: 5px;
+  text-align: center;
   margin-bottom: 18px;
   border: 1px solid #333;
 `;
@@ -23,7 +26,9 @@ const ProductImage = styled.img`
 
 const ProductCard = ({ data }) => {
   if (!data) return null;
-  const { title, description, price, id } = data;
+  const { title, 
+    // description, 
+    price, id } = data;
   return (
     <StyledProduct>
       <Link
@@ -51,6 +56,10 @@ const ProductCard = ({ data }) => {
       </h3>
       {/* <p>{description}</p> */}
       <b>{price}</b>
+      <div>
+      <Button>like</Button> <Button>Add</Button>
+
+      </div>
     </StyledProduct>
   );
 };
