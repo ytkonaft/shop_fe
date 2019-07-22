@@ -3,12 +3,19 @@ import { modularScale } from "polished";
 const Theme = {
   colors: {
     main: "#ae00ff",
-    mainHover: "#650194",
     white: "#FFFFFF",
     dark: "#333",
     gray:  "#eee",
     success: "#4DD47A",
-    error: "#F24040"
+    error: "#F24040",
+    hover: {
+      main: "#650194",
+      white: "#FFFFFF",
+      dark: "#888",
+      gray:  "#ccc",
+      success: "#4DD47A",
+      error: "#b53232"
+    }
   },
   typo: {
     fonts: {

@@ -5,7 +5,7 @@ const defaultStyle = css`
   color: ${({theme})=> theme.colors.white};
 
   &:hover {
-    background: ${({theme})=> theme.colors.mainHover};
+    background: ${({theme})=> theme.colors.hover.main};
   }
 `
 
@@ -23,6 +23,10 @@ const secondaryStyle = css`
 const dangerStyle = css`
   background: ${({theme})=> theme.colors.error};
   color: ${({theme})=> theme.colors.white};
+
+  &:hover {
+    background: ${({theme})=> theme.colors.hover.error};
+  }
 `
 
 const successStyle = css`

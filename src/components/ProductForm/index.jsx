@@ -36,7 +36,7 @@ const validate = values => {
   return errors;
 };
 
-const ProductForm = ({ client }) => {
+const ProductForm = ({ client, productData }) => {
   const [requestStatus, setStatus] = useState({
     error: null,
     sucess: null
@@ -47,7 +47,6 @@ const ProductForm = ({ client }) => {
     { setSubmitting }
   ) => {
     try {
-      console.log(image);
       const { data } = await client.mutate({
         mutation: CREATE_PRODUCT,
         variables: {
@@ -68,10 +67,16 @@ const ProductForm = ({ client }) => {
     }
   };
 
+  const initialValues ={
+     title: productData ? productData.title : "", 
+     description: productData ? productData.description : "",
+     price: productData ? productData.price : 0.0,
+  }
+  
   return (
     <div>
       <Formik
-        initialValues={{ title: "", description: "", price: 0.0 }}
+        initialValues={initialValues}
         validate={validate}
         onSubmit={handleSubmit}
       >
