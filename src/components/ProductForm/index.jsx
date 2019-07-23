@@ -15,9 +15,29 @@ const CREATE_PRODUCT = gql`
     $title: String!
     $description: String!
     $price: Float!
-    $image: Upload!
+    $image: Upload
   ) {
     createProduct(
+      title: $title
+      description: $description
+      price: $price
+      image: $image
+    ) {
+      id
+    }
+  }
+`;
+
+const UPDATE_PRODUCT = gql`
+  mutation UPDATE_PRODUCT(
+    $id: ID!
+    $title: String!
+    $description: String!
+    $price: Float!
+    $image: Upload
+  ) {
+    UpdateProduct(
+      id: $id
       title: $title
       description: $description
       price: $price
@@ -47,20 +67,27 @@ const ProductForm = ({ client, productData }) => {
     { setSubmitting }
   ) => {
     try {
+      const params = {
+        title,
+        description,
+        price,
+        image
+      }
+      if (productData) {
+        params.id = productData.id
+      }
+
       const { data } = await client.mutate({
-        mutation: CREATE_PRODUCT,
-        variables: {
-          title,
-          description,
-          price,
-          image
-        }
+        mutation: params.id ? UPDATE_PRODUCT: CREATE_PRODUCT,
+        variables: params
       });
+
       setStatus({
         ...requestStatus,
         sucess: data.createProduct.id
       });
       setSubmitting(false);
+
     } catch (err) {
       console.error(err);
       setSubmitting(false);
