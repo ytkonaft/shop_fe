@@ -1,7 +1,7 @@
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 
-const ALL_PRODUCTS = gql`
+export const ALL_PRODUCTS = gql`
   query ALL_PRODUCTS {
     products {
       id

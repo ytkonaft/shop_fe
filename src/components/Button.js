@@ -82,6 +82,7 @@ export const Button = styled.button`
 `;
 
 export const ButtonLink = styled.a`
+  text-decoration: none;
   ${ButtonStyle}
 `;
 
