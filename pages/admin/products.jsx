@@ -1,15 +1,17 @@
 import { Container } from "styles/grid";
 import Products from "containers/Products";
-import {Button} from "components/Button";
+import { ButtonLink } from "components/Button";
 import ProductRow from "components/ProductRow";
 import { AdminLayout } from "layouts";
- 
-const AddProduct = () => {
+
+const ProductsPage = () => {
   return (
     <AdminLayout>
       <div>
         <h1>Add product</h1>
-        <Button btnType="secondary">Add product</Button>
+        <ButtonLink href="/admin/add-product" btnType="secondary">
+          Add product
+        </ButtonLink>
       </div>
       <Container>
         <Products ProductItm={ProductRow} />
@@ -18,4 +20,4 @@ const AddProduct = () => {
   );
 };
 
-export default AddProduct;
+export default ProductsPage;

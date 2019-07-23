@@ -3,7 +3,8 @@ import Router from "next/router";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import { Container } from "styles/grid";
-import ProductForm from 'components/ProductForm'
+import ProductForm from "components/ProductForm";
+import GoBackBtn from "components/GoBackBtn";
 import { AdminLayout } from "layouts";
 
 const SINGLE_PRODUCT = gql`
@@ -21,22 +22,23 @@ const SINGLE_PRODUCT = gql`
 const ProductAdminPage = ({ id }) => {
   return (
     <AdminLayout>
-        <Container>
+      <Container>
         <Query query={SINGLE_PRODUCT} variables={{ id }}>
-            {({ loading, error, data: { product } }) => {
+          {({ loading, error, data: { product } }) => {
             if (loading) return "Loading...";
             if (error) return `Error! ${error.message}`;
             return (
-                <Container>
-                <h1>{product.title}</h1>
-                    <ProductForm
-                        productData={product}
-                    />
-                </Container>
+              <Container>
+                <h1>
+                  <GoBackBtn />
+                  {product.title}
+                </h1>
+                <ProductForm productData={product} />
+              </Container>
             );
-            }}
+          }}
         </Query>
-        </Container>
+      </Container>
     </AdminLayout>
   );
 };
