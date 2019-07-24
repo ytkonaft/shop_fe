@@ -5,9 +5,10 @@ const Theme = {
     main: "#ae00ff",
     white: "#FFFFFF",
     dark: "#333",
-    gray:  "#eee",
+    gray:  "#ddd",
     success: "#4DD47A",
     error: "#F24040",
+    background: "#edf2f7",
     hover: {
       main: "#650194",
       white: "#FFFFFF",
@@ -15,8 +16,9 @@ const Theme = {
       gray:  "#ccc",
       success: "#4DD47A",
       error: "#b53232"
-    }
+    },
   },
+  boxShadow: "0 20px 25px -5px rgba(0,0,0,.1), 0 10px 10px -5px rgba(0,0,0,.04)",
   typo: {
     fonts: {
       default: "Roboto, sans-serif",

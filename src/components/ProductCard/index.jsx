@@ -1,16 +1,17 @@
 import styled from "styled-components";
 import Link from "next/link";
-import { Button } from "components/Button";
+import { Button } from "components/styled/Button";
 
 const StyledProduct = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding: 5px;
-  text-align: center;
+  text-align: left;
   margin-bottom: 18px;
-  border-radius: 3px;
+  border-radius: 0.5rem;
   border: 1px solid ${({ theme }) => theme.colors.gray};
+  background: ${({ theme }) => theme.colors.white};
+  box-shadow: ${({theme}) => theme.boxShadow};
 `;
 
 const ProductImageWrp = styled.a`
@@ -18,6 +19,11 @@ const ProductImageWrp = styled.a`
   height: 150px;
   display: block;
   text-align: center;
+  cursor: pointer;
+`;
+
+const ProductDesc = styled.p`
+  font-size: ${({theme: {ms}}) => ms(1.4)};
 `;
 
 const ProductImage = styled.img`
@@ -25,11 +31,15 @@ const ProductImage = styled.img`
   max-height: 100%;
 `;
 
+const ProductCardInfo = styled.div`
+  padding: ${({theme: {ms}}) => `${ms(0)}`};
+`
+
 const ProductCard = ({ data }) => {
   if (!data) return null;
   const {
     title,
-    // description,
+    description,
     price,
     id
   } = data;
@@ -48,22 +58,24 @@ const ProductCard = ({ data }) => {
           />
         </ProductImageWrp>
       </Link>
-      <h3>
-        <Link
-          href={{
-            pathname: "/product",
-            query: { id: id }
-          }}
-        >
-          <a>{title}</a>
-        </Link>
-      </h3>
-      {/* <p>{description}</p> */}
-      <b>{price}</b>
-      <div>
-        <Button btnType="default">like</Button>{" "}
-        <Button btnType="success">Add</Button>
-      </div>
+      <ProductCardInfo>
+        <h3>
+          <Link
+            href={{
+              pathname: "/product",
+              query: { id: id }
+            }}
+          >
+            <a>{title}</a>
+          </Link>
+        </h3>
+        <ProductDesc>{description}</ProductDesc>
+        <b>{price}</b>
+        <div>
+          <Button btnType="default">like</Button>{" "}
+          <Button btnType="success">Add</Button>
+        </div>
+      </ProductCardInfo>
     </StyledProduct>
   );
 };

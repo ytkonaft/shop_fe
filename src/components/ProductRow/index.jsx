@@ -3,17 +3,17 @@ import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
 import Link from "next/link";
 import { Row, Col } from "styles/grid";
-import {Button, ButtonLink} from "components/Button";
+import {Button, ButtonLink} from "components/styled/Button";
 import {ALL_PRODUCTS} from "containers/Products"
 
 const StyledProductRow = styled(Row)`
   padding-top: 25px;
   padding-bottom: 25px;
-  border-bottom: 1px solid #333;
-
-  &:last-child {
-    border: none;
-  }
+  border: 1px solid ${({theme}) => theme.colors.gray};
+  background: ${({theme}) => theme.colors.white};
+  box-shadow: ${({theme}) => theme.boxShadow};
+  margin: ${({theme}) => theme.ms(-3)} auto;
+  border-radius: ${({theme}) => theme.ms(-6)};
 `;
 
 const StyledImg = styled.img`

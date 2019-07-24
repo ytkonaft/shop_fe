@@ -10,7 +10,7 @@ const StyledNav = styled.nav`
 `;
 
 const StyledLink = styled.a`
-  color: #fff;
+  color: ${({theme}) => theme.colors.dark};
   cursor: pointer;
   display: block;
   margin: 0 10px;

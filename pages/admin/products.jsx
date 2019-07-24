@@ -1,6 +1,6 @@
 import { Container } from "styles/grid";
 import Products from "containers/Products";
-import { ButtonLink } from "components/Button";
+import { ButtonLink } from "components/styled/Button";
 import ProductRow from "components/ProductRow";
 import { AdminLayout } from "layouts";
 

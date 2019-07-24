@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const StyledMainLayout = styled.div`
-  background: ${({ theme }) => theme.colors.porcelain};
+  background: ${({ theme }) => theme.colors.background};
   max-width: 100%;
   display: flex;
   flex: 1 1 100%;

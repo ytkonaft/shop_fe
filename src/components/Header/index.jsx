@@ -4,7 +4,7 @@ import { Container, Row, Col } from "styles/grid";
 import Router from "next/router";
 import NProgress from "nprogress";
 
-NProgress.configure({ showSpinner: false });
+NProgress.configure({ showSpinner: false, parent: '#np-progress' });
 
 Router.events.on("routeChangeStart", () => {
   NProgress.start();
@@ -19,8 +19,11 @@ Router.events.on("routeChangeError", () => {
 });
 
 const StyledHeader = styled.header`
-  background: ${({ theme }) => theme.colors.dark};
+  background: ${({ theme }) => theme.colors.white};
+  border-bottom: 1px solid ${({theme}) => theme.colors.gray};
+  box-shadow: 0 10px 15px -1px rgba(0, 0, 0, 0.2);
   height: 50px;
+  overflow: visible;
 `;
 
 const StyledContainer = styled(Container)`
@@ -32,8 +35,8 @@ const StyledRow = styled(Row)`
 `;
 
 const StyledLogo = styled.h1`
-  color: #333;
-  background: #fff;
+  color: ${({ theme }) => theme.colors.white};
+  background: ${({ theme }) => theme.colors.dark};
   transform: skew(0, -10deg) translateY(30%);
   margin: 0;
   font-size: ${({ theme: { ms } }) => ms(6)};
@@ -45,7 +48,7 @@ const StyledLogo = styled.h1`
   &::before {
     position: absolute;
     content: "";
-    background: #fff;
+    background: ${({ theme }) => theme.colors.dark};
     width: 30%;
     height: 100%;
     top: 0;
@@ -65,7 +68,7 @@ const StyledLogo = styled.h1`
 
 const Header = () => {
   return (
-    <StyledHeader>
+    <StyledHeader id="np-progress">
       <StyledContainer>
         <StyledRow>
           <Col col={{ sm: 24, md: 12, lg: 6 }}>

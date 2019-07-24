@@ -3,7 +3,7 @@ import { Container, Row, Col } from "styles/grid";
 import SidebarMenu from "components/SidebarMenu";
 
 const StyledAdminLayout = styled.div`
-  background: ${({ theme }) => theme.colors.porcelain};
+  background: ${({ theme }) => theme.colors.background};
   max-width: 100%;
   padding: 40px 0;
   display: flex;
