@@ -13,7 +13,8 @@ const NextConfig = {
         layouts: path.resolve(__dirname, "src/layouts/"),
         styles: path.resolve(__dirname, "src/styles/"),
         hooks: path.resolve(__dirname, "src/hooks/"),
-        seo: path.resolve(__dirname, "src/seo/")
+        seo: path.resolve(__dirname, "src/seo/"),
+        views: path.resolve(__dirname, "src/views/")
       },
       extensions: [".js", ".jsx", ".mjs", ".css", ".graphql"]
     };
