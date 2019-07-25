@@ -1,6 +1,7 @@
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import {Button} from "components/styled/Button";
 import { AdminLayout } from "layouts";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import {H1} from "components/styled/Text"
 
 const AddProduct = () => {
   const validate = values => {
@@ -20,7 +21,7 @@ const AddProduct = () => {
 
   return (
     <AdminLayout>
-      <h1>Add category</h1>
+      <H1>Add category</H1>
       <Formik
         initialValues={{ title: "", description: "", price: 0.0 }}
         validate={validate}

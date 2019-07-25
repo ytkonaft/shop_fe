@@ -1,11 +1,11 @@
 import Router from "next/router";
-// import styled from "styled-components";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import { Container } from "styles/grid";
 import ProductForm from "components/ProductForm";
 import GoBackBtn from "components/GoBackBtn";
 import { AdminLayout } from "layouts";
+import {H1} from "components/styled/Text"
 
 const SINGLE_PRODUCT = gql`
   query SINGLE_PRODUCT($id: ID!) {
@@ -29,10 +29,10 @@ const ProductAdminPage = ({ id }) => {
             if (error) return `Error! ${error.message}`;
             return (
               <Container>
-                <h1>
+                <H1>
                   <GoBackBtn />
                   {product.title}
-                </h1>
+                </H1>
                 <ProductForm productData={product} />
               </Container>
             );

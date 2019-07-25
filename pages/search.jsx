@@ -1,9 +1,10 @@
 import { Container } from "styles/grid";
+import {H1} from "components/styled/Text"
 
 const SearchPage = () => {
   return (
     <Container>
-      <h1>Search page</h1>
+      <H1>Search page</H1>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, officia!
         Unde illum inventore vero laborum maiores, fuga sint optio tenetur

@@ -1,9 +1,11 @@
 import { Container } from "styles/grid";
+import {H1, Text} from "components/styled/Text"
+
 const ProfilePage = () => {
   return (
     <Container>
-      <h1>Profile page</h1>
-      <p>
+      <H1>Profile page</H1>
+      <Text>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis voluptate
         a in modi ab dolorum labore. Ea aut qui ducimus officia corporis quo
         aliquid, accusantium harum ut eos maiores nam sed iste voluptate alias
@@ -113,7 +115,7 @@ const ProfilePage = () => {
         quibusdam amet assumenda autem veritatis omnis aspernatur delectus iusto
         aut repellat aliquid labore, provident reiciendis aperiam vero cumque
         non? Magni, tenetur eum.
-      </p>
+      </Text>
     </Container>
   );
 };

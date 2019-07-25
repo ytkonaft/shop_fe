@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Link from "next/link";
 import { Button } from "components/styled/Button";
+import { H3 } from "components/styled/Text";
 
 const StyledProduct = styled.div`
   width: 100%;
@@ -59,7 +60,7 @@ const ProductCard = ({ data }) => {
         </ProductImageWrp>
       </Link>
       <ProductCardInfo>
-        <h3>
+        <H3>
           <Link
             href={{
               pathname: "/product",
@@ -68,7 +69,7 @@ const ProductCard = ({ data }) => {
           >
             <a>{title}</a>
           </Link>
-        </h3>
+        </H3>
         <ProductDesc>{description}</ProductDesc>
         <b>{price}</b>
         <div>

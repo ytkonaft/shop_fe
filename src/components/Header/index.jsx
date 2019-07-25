@@ -21,7 +21,7 @@ Router.events.on("routeChangeError", () => {
 const StyledHeader = styled.header`
   background: ${({ theme }) => theme.colors.white};
   border-bottom: 1px solid ${({theme}) => theme.colors.gray};
-  box-shadow: 0 10px 15px -1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2);
   height: 50px;
   overflow: visible;
 `;
@@ -76,6 +76,7 @@ const Header = () => {
           </Col>
           <Col col={{ md: 12, lg: 18 }}>
             <Navigation />
+            <button>azazaz</button>
           </Col>
         </StyledRow>
       </StyledContainer>

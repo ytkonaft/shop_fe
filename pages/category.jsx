@@ -1,10 +1,12 @@
 import { Container } from "styles/grid";
+import {H1, Text} from "components/styled/Text"
+
 
 const CategoriesPage = () => {
   return (
     <Container>
-      <h1>Categories page</h1>
-      <p>
+      <H1>Categories page</H1>
+      <Text>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda
         nostrum aliquid qui quod quaerat iste similique voluptatum suscipit
         iure, officiis dolore velit totam molestias debitis temporibus, saepe
@@ -16,7 +18,7 @@ const CategoriesPage = () => {
         voluptatum harum illo impedit modi? Exercitationem ut delectus labore
         sit, inventore, animi dolorum totam quaerat facilis reprehenderit quas
         minus, vel consequuntur similique a! Impedit qui vel sit incidunt quasi?
-      </p>
+      </Text>
     </Container>
   );
 };

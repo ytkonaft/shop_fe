@@ -1,5 +1,6 @@
-import { Container, Row, Col } from "styles/grid";
 import styled from "styled-components";
+import { Container, Row, Col } from "styles/grid";
+import {H1} from "components/styled/Text"
 
 const StyledImg = styled.img`
   max-width: 100%;
@@ -8,7 +9,7 @@ const StyledImg = styled.img`
  const ProductView = ({data}) => {
     return (
         <Container>
-        <h1>{data.title}</h1>
+        <H1>{data.title}</H1>
         <Row>
           <Col col={{ md: 6 }}>
             <StyledImg src={data.image} alt="" />
