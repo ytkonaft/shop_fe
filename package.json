@@ -44,6 +44,7 @@
     "react-adopt": "^0.6.0",
     "react-apollo": "^2.2.1",
     "react-dom": "^16.5.2",
+    "react-pose": "^4.0.8",
     "react-rasta": "^1.0.4",
     "react-stripe-checkout": "^2.6.3",
     "react-transition-group": "^2.5.0",

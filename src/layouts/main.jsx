@@ -5,6 +5,7 @@ const StyledMainLayout = styled.div`
   max-width: 100%;
   display: flex;
   flex: 1 1 100%;
+  padding-top: 60px;
   flex-direction: column;
 `;
 

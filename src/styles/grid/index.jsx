@@ -27,7 +27,6 @@ const getColCss = ({ lg, md, sm }) => {
   return css`
     flex: 0 0 ${lgW}%;
     max-width: ${lgW}%;
-    flex-direction: column;
 
     @media screen and (max-width: ${({ theme }) => theme.breakpoints.md}px) {
       flex: 0 0 ${mdW}%;
@@ -44,6 +43,7 @@ const getColCss = ({ lg, md, sm }) => {
 
 export const Col = styled.div`
   display: flex;
+  flex-direction: ${({ flexDirection }) => flexDirection || "column"};
   padding: 0 ${GUTTER_WIDTH};
   align-items: ${({ alignItems }) => alignItems || "flex-start"};
   ${({ col }) => getColCss(col)};

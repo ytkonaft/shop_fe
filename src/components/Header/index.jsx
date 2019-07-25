@@ -1,10 +1,12 @@
 import styled from "styled-components";
-import Navigation from "components/navigation";
-import { Container, Row, Col } from "styles/grid";
+import { useState } from "react";
 import Router from "next/router";
 import NProgress from "nprogress";
+import posed, { PoseGroup } from "react-pose";
+import Navigation from "components/navigation";
+import { Container, Row, Col } from "styles/grid";
 
-NProgress.configure({ showSpinner: false, parent: '#np-progress' });
+NProgress.configure({ showSpinner: false, parent: "#np-progress" });
 
 Router.events.on("routeChangeStart", () => {
   NProgress.start();
@@ -19,11 +21,20 @@ Router.events.on("routeChangeError", () => {
 });
 
 const StyledHeader = styled.header`
-  background: ${({ theme }) => theme.colors.white};
-  border-bottom: 1px solid ${({theme}) => theme.colors.gray};
   box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2);
   height: 50px;
   overflow: visible;
+  position: absolute;
+  z-index: ${({ theme }) => theme.zIndex.top};
+  left: 0;
+  top: 0;
+  width: 100%;
+`;
+
+const HeaderInner = styled.div`
+  height: 100%;
+  background: ${({ theme }) => theme.colors.white};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.gray};
 `;
 
 const StyledContainer = styled(Container)`
@@ -66,20 +77,103 @@ const StyledLogo = styled.h1`
   }
 `;
 
+const DROPDOWN_ANIMATION_TIME = 400;
+const PRE_ENTER_DROPDOWN_POSE = "pre-enter-dropdown-pose";
+const ENTER_DROPDOWN_POSE = "enter-dropdown-pose";
+const EXIT_DROPDOWN_POSE = "exit-dropdown-pose";
+
+const Dropdown = posed(styled.div`
+  position: absolute;
+  width: 100%;
+  padding-top: 60px;
+  top: 0;
+  background: #fff;
+  left: 0;
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  z-index: -1;
+  height: 400px;
+`)({
+  [PRE_ENTER_DROPDOWN_POSE]: {
+    y: "-100%",
+    opacity: 1
+  },
+  [ENTER_DROPDOWN_POSE]: {
+    y: 0,
+    transition: {
+      duration: DROPDOWN_ANIMATION_TIME
+    }
+  },
+  [EXIT_DROPDOWN_POSE]: {
+    y: "-100%",
+    opacity: 0,
+    transition: {
+      opacity: {
+        delay: 300,
+        duration: 100
+      },
+      duration: DROPDOWN_ANIMATION_TIME
+    }
+  },
+  transition: {
+    duration: DROPDOWN_ANIMATION_TIME
+  }
+});
+
+const StyledBtn = styled.button`
+  background: none;
+  border: none;
+  padding: 0;
+  color: ${({ theme }) => theme.colors.dark};
+  cursor: pointer;
+  display: block;
+  margin: 0 10px;
+  font-size: ${({ theme: { ms } }) => ms(1.2)};
+  text-transform: uppercase;
+`;
+
 const Header = () => {
+  const [open, toggleMenu] = useState(false);
+
+  const handleOpen = () => {
+    toggleMenu(!open);
+  };
+
   return (
     <StyledHeader id="np-progress">
-      <StyledContainer>
-        <StyledRow>
-          <Col col={{ sm: 24, md: 12, lg: 6 }}>
-            <StyledLogo>Logo</StyledLogo>
-          </Col>
-          <Col col={{ md: 12, lg: 18 }}>
-            <Navigation />
-            <button>azazaz</button>
-          </Col>
-        </StyledRow>
-      </StyledContainer>
+      <HeaderInner>
+        <StyledContainer>
+          <StyledRow>
+            <Col col={{ sm: 24, md: 12, lg: 4 }}>
+              <StyledLogo>Logo</StyledLogo>
+            </Col>
+            <Col
+              col={{ sm: 24, md: 12, lg: 4 }}
+              alignItems="center"
+              flexDirection="row"
+            >
+              <StyledBtn onClick={handleOpen}>Catergories</StyledBtn>
+            </Col>
+            <Col col={{ md: 12, lg: 16 }}>
+              <Navigation />
+            </Col>
+          </StyledRow>
+        </StyledContainer>
+
+        <PoseGroup
+          preEnterPose={PRE_ENTER_DROPDOWN_POSE}
+          exitPose={EXIT_DROPDOWN_POSE}
+          enterPose={ENTER_DROPDOWN_POSE}
+        >
+          {open && (
+            <Dropdown key="submenu-dropdown">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo
+              expedita, veritatis consequuntur unde non eaque, dignissimos quis
+              quas eum ut esse inventore, neque at quod iusto reiciendis ab!
+              Doloremque, aut.
+            </Dropdown>
+          )}
+        </PoseGroup>
+      </HeaderInner>
     </StyledHeader>
   );
 };
