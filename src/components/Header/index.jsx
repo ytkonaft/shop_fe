@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import { useState } from "react";
-import Router from "next/router";
+import { useState, useRef, useEffect } from "react";
+import Router, { withRouter }  from "next/router";
+import useOnClickOutside from 'use-onclickoutside';
 import NProgress from "nprogress";
 import posed, { PoseGroup } from "react-pose";
 import Navigation from "components/navigation";
@@ -131,15 +132,24 @@ const StyledBtn = styled.button`
   text-transform: uppercase;
 `;
 
-const Header = () => {
+const Header = ({router}) => {
+  const header = useRef()
   const [open, toggleMenu] = useState(false);
+
+  useEffect(() => {
+    toggleMenu(false);
+    }, [router])
 
   const handleOpen = () => {
     toggleMenu(!open);
   };
 
+  useOnClickOutside(header, () => {
+    toggleMenu(false);
+  });
+  
   return (
-    <StyledHeader id="np-progress">
+    <StyledHeader id="np-progress" ref={header}>
       <HeaderInner>
         <StyledContainer>
           <StyledRow>
@@ -166,10 +176,12 @@ const Header = () => {
         >
           {open && (
             <Dropdown key="submenu-dropdown">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo
-              expedita, veritatis consequuntur unde non eaque, dignissimos quis
-              quas eum ut esse inventore, neque at quod iusto reiciendis ab!
-              Doloremque, aut.
+              <Container>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo
+                expedita, veritatis consequuntur unde non eaque, dignissimos quis
+                quas eum ut esse inventore, neque at quod iusto reiciendis ab!
+                Doloremque, aut.
+              </Container>
             </Dropdown>
           )}
         </PoseGroup>
@@ -178,4 +190,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default withRouter(Header);

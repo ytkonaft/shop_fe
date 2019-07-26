@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Head from 'next/head'
 import { Container, Row, Col } from "styles/grid";
 import {H1} from "components/styled/Text"
 
@@ -9,6 +10,9 @@ const StyledImg = styled.img`
  const ProductView = ({data}) => {
     return (
         <Container>
+          <Head>
+            <title>olololo | {data.title}</title>
+          </Head>
         <H1>{data.title}</H1>
         <Row>
           <Col col={{ md: 6 }}>
