@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import ProductsGrid from "components/ProductsGrid";
+import Pagination from "components/Pagination";
 import { Container } from "styles/grid";
 
 const StyledContainer = styled(Container)`
@@ -10,7 +11,9 @@ const StyledContainer = styled(Container)`
 const Home = () => {
   return (
     <StyledContainer gutterOff>
-      <ProductsGrid />
+      <Pagination/>
+        <ProductsGrid />
+      <Pagination/>
     </StyledContainer>
   );
 };
