@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Icon from "components/Icon";
 import PagerItm from "./PagerItm";
 
 const PagerWrp = styled.div`
@@ -13,7 +14,7 @@ const Pager = ({ pathName, currentPage, totalPages, pagerOptions }) => (
   <PagerWrp>
     <PagerItm
       page={currentPage - 1}
-      text="prev"
+      text={<Icon type="arrow-left" size="extra-lg" />}
       pathName={pathName}
       disable={currentPage <= 1}
     />
@@ -30,7 +31,7 @@ const Pager = ({ pathName, currentPage, totalPages, pagerOptions }) => (
 
     <PagerItm
       page={currentPage + 1}
-      text="next"
+      text={<Icon type="arrow-right" size="extra-lg" />}
       pathName={pathName}
       disable={currentPage >= totalPages}
     />

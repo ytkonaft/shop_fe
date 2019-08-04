@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Container, Row, Col } from "styles/grid";
 import Card from "components/styled/Card";
+import AuthForm from "components/AuthForm";
 
 export const StyledContainer = styled(Container)`
   min-height: 100%;
@@ -22,7 +23,7 @@ const SignUp = () => {
             <h1>Sign In</h1>
           </Col>
           <Col col={{ md: 12 }}>
-            <p>azazazazaz</p>
+            <AuthForm />
           </Col>
         </Row>
       </AuthWrp>

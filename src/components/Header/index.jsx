@@ -4,8 +4,9 @@ import Router, { withRouter } from "next/router";
 import Link from "next/link";
 import useOnClickOutside from "use-onclickoutside";
 import NProgress from "nprogress";
-import Navigation from "components/navigation";
+import Navigation from "components/Navigation";
 import { Container, Col } from "styles/grid";
+import Icon from "components/Icon";
 import {
   Dropdown,
   StyledHeader,
@@ -60,7 +61,10 @@ const Header = ({ router }) => {
                 <Link href="/">
                   <StyledLogo>Logo</StyledLogo>
                 </Link>
-                <StyledBtn onClick={handleOpen}>Catergories</StyledBtn>
+                <StyledBtn active={open} onClick={handleOpen}>
+                  Catergories
+                  <Icon type="arrow-down" size="md" />
+                </StyledBtn>
               </LogoWrp>
             </Col>
             <Col col={{ md: 12, lg: 14 }}>

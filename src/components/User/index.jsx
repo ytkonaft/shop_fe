@@ -7,6 +7,7 @@ export const CURRENT_USER = gql`
     me {
       name
       email
+      permissions
     }
   }
 `;

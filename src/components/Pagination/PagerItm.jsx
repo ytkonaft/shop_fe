@@ -9,6 +9,7 @@ const CommonStyles = css`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  margin: 0 ${({ theme: { ms } }) => ms(-2)};
 `;
 
 const StyledLink = styled.a`
@@ -18,12 +19,27 @@ const StyledLink = styled.a`
   color:  ${({ theme: { colors }, active }) =>
     active ? colors.white : colors.main};
   cursor: pointer;
+  
+  path {
+    fill: ${({ theme: { colors }, active }) =>
+      active ? colors.white : colors.main};
+  }
+
+  &:hover {
+    background:  ${({ theme: { colors }, active }) =>
+      active ? colors.hover.main : colors.gray};
+  }
+
 `;
 
 const StyledSpan = styled.span`
   ${CommonStyles}
   color: ${({ theme }) => theme.colors.gray};
   cursor: default;
+  
+  path {
+    fill:  ${({ theme }) => theme.colors.gray};
+  }
 `;
 
 const StyledGap = styled.span`

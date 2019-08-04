@@ -46,7 +46,6 @@ const initialSignUpValues = {
 };
 
 const AuthForm = ({ client, isSignUp }) => {
-  console.log(client);
   const handleSubmit = async (values, { setSubmitting }) => {
     setSubmitting(true);
     try {
@@ -68,6 +67,8 @@ const AuthForm = ({ client, isSignUp }) => {
     }
   };
 
+  const SubmitText = isSignUp ? "Sign up" : "Sign in";
+
   return (
     <div>
       <Formik
@@ -78,11 +79,13 @@ const AuthForm = ({ client, isSignUp }) => {
         {({ isSubmitting }) => {
           return (
             <Form>
-              <div>
-                <StyledLabel>Name</StyledLabel>
-                <Field type="text" name="name" />
-                <ErrorMessage name="name" component="div" />
-              </div>
+              {isSignUp && (
+                <div>
+                  <StyledLabel>Name</StyledLabel>
+                  <Field type="text" name="name" />
+                  <ErrorMessage name="name" component="div" />
+                </div>
+              )}
               <div>
                 <StyledLabel>Email</StyledLabel>
                 <Field type="text" name="email" />
@@ -100,7 +103,7 @@ const AuthForm = ({ client, isSignUp }) => {
                   active={true}
                   disabled={isSubmitting}
                 >
-                  {isSubmitting ? "Sending..." : "Sign up"}
+                  {isSubmitting ? "Sending..." : SubmitText}
                 </Button>
               </div>
             </Form>

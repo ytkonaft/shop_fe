@@ -44,6 +44,12 @@ export const StyledBtn = styled.button`
   margin: 0 10px;
   font-size: ${({ theme: { ms } }) => ms(1.2)};
   text-transform: uppercase;
+
+  i {
+    margin-left: ${({ theme: { ms } }) => ms(-3)};
+    transition: transform 0.3s ease;
+    transform: rotate(${({ active }) => (active ? "-180" : "0")}deg);
+  }
 `;
 
 export const StyledLogo = styled.a`

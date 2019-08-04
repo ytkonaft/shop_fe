@@ -19,7 +19,7 @@ const StyledLink = styled.a`
   text-transform: uppercase;
 `;
 
-const navOptions = [
+const generalNav = [
   {
     href: "/category",
     title: "Categories"
@@ -35,11 +35,15 @@ const navOptions = [
   {
     href: "/cart",
     title: "Cart"
-  },
-  {
-    href: "/admin",
-    title: "Admin"
-  },
+  }
+];
+
+const adminLink = {
+  href: "/admin",
+  title: "Admin"
+};
+
+const authLinks = [
   {
     href: "/sign-in",
     title: "Sign in"
@@ -50,16 +54,30 @@ const navOptions = [
   }
 ];
 
+const createLnk = lnk => {
+  return (
+    <Link href={lnk.href} key={lnk.title}>
+      <StyledLink>{lnk.title}</StyledLink>
+    </Link>
+  );
+};
+
 const Navigation = () => (
   <StyledNav alignItems="center">
-    {navOptions.map(lnk => {
-      return (
-        <Link href={lnk.href} key={lnk.title}>
-          <StyledLink>{lnk.title}</StyledLink>
-        </Link>
-      );
-    })}
-    <User>{({ me }) => (me ? me.name : null)}</User>
+    {generalNav.map(createLnk)}
+    <User>
+      {({ me }) => (
+        <>
+          {!me && authLinks.map(createLnk)}
+          {me && (
+            <>
+              {me.permissions.includes("ADMIN") && createLnk(adminLink)}
+              {me.name}
+            </>
+          )}
+        </>
+      )}
+    </User>
   </StyledNav>
 );
 

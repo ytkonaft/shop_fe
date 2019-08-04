@@ -54,6 +54,7 @@
     "waait": "^1.0.2"
   },
   "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.10.1",
     "babel-eslint": "^10.0.2",
     "babel-jest": "^23.6.0",
     "babel-plugin-module-resolver": "^3.2.0",
