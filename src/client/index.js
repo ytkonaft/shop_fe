@@ -3,11 +3,13 @@ import { getDataFromTree } from "react-apollo";
 import Head from "next/head";
 import initApollo from "./init-apollo";
 
-export default (App) => {
+export default App => {
   return class Apollo extends React.Component {
     static displayName = "withApollo(App)";
     static async getInitialProps(ctx) {
       const { Component, router } = ctx;
+
+      const headers = ctx.ctx.req && ctx.ctx.req.headers;
 
       let appProps = {};
       if (App.getInitialProps) {
@@ -16,7 +18,7 @@ export default (App) => {
 
       // Run all GraphQL queries in the component tree
       // and extract the resulting data
-      const apollo = initApollo();
+      const apollo = initApollo(null, headers);
       if (typeof window === "undefined") {
         try {
           // Run all GraphQL queries
@@ -42,16 +44,16 @@ export default (App) => {
 
       // Extract query data from the Apollo store
       const apolloState = apollo.cache.extract();
-
       return {
         ...appProps,
-        apolloState
+        apolloState,
+        headers
       };
     }
 
     constructor(props) {
       super(props);
-      this.apolloClient = initApollo(props.apolloState);
+      this.apolloClient = initApollo(props.apolloState, props.headers);
     }
 
     render() {

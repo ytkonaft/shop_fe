@@ -1,19 +1,8 @@
 import styled from "styled-components";
 import Link from "next/link";
 import { Button } from "components/styled/Button";
+import Card from "components/styled/Card";
 import { H3 } from "components/styled/Text";
-
-const StyledProduct = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-  margin-bottom: 18px;
-  border-radius: 0.5rem;
-  border: 1px solid ${({ theme }) => theme.colors.gray};
-  background: ${({ theme }) => theme.colors.white};
-  box-shadow: ${({theme}) => theme.boxShadow};
-`;
 
 const ProductImageWrp = styled.a`
   width: 100%;
@@ -24,7 +13,7 @@ const ProductImageWrp = styled.a`
 `;
 
 const ProductDesc = styled.p`
-  font-size: ${({theme: {ms}}) => ms(1.4)};
+  font-size: ${({ theme: { ms } }) => ms(1.4)};
 `;
 
 const ProductImage = styled.img`
@@ -33,19 +22,14 @@ const ProductImage = styled.img`
 `;
 
 const ProductCardInfo = styled.div`
-  padding: ${({theme: {ms}}) => `${ms(0)}`};
-`
+  padding: ${({ theme: { ms } }) => `${ms(0)}`};
+`;
 
 const ProductCard = ({ data }) => {
   if (!data) return null;
-  const {
-    title,
-    description,
-    price,
-    id
-  } = data;
+  const { title, description, price, id } = data;
   return (
-    <StyledProduct>
+    <Card>
       <Link
         href={{
           pathname: "/product",
@@ -77,7 +61,7 @@ const ProductCard = ({ data }) => {
           <Button btnType="success">Add</Button>
         </div>
       </ProductCardInfo>
-    </StyledProduct>
+    </Card>
   );
 };
 

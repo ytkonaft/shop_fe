@@ -6,29 +6,33 @@ import { endpoint } from "../../config";
 
 let apolloClient = null;
 
-const create = (initialState) => {
-  // Check out https://github.com/zeit/next.js/pull/4611 if you want to use the AWSAppSyncClient
+const create = (initialState, headers) => {
   const isBrowser = typeof window !== "undefined";
 
   return new ApolloClient({
     connectToDevTools: isBrowser,
     ssrMode: !isBrowser,
-    link: createUploadLink({ uri: endpoint }),
     cache: new InMemoryCache().restore(initialState || {}),
-    fetch: fetch
+    link: createUploadLink({
+      uri: endpoint,
+      fetch,
+      fetchOptions: { credentials: "include" },
+      headers: { cookie: headers && headers.cookie },
+      credentials: "include"
+    })
   });
 };
 
-const initApollo = (initialState) => {
+const initApollo = (initialState, headers) => {
   // Make sure to create a new client for every server-side request so that data
   // isn't shared between connections (which would be bad)
 
   if (typeof window === "undefined") {
-    return create(initialState);
+    return create(initialState, headers);
   }
   // Reuse client on the client-side
   if (!apolloClient) {
-    apolloClient = create(initialState);
+    apolloClient = create(initialState, headers);
   }
   return apolloClient;
 };

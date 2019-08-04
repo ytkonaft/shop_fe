@@ -1,9 +1,11 @@
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
+import { withRouter } from "next/router";
+import { perPage } from "config";
 
 export const ALL_PRODUCTS = gql`
-  query ALL_PRODUCTS {
-    products {
+  query ALL_PRODUCTS($skip: Int = 0, $first: Int = ${perPage}) {
+    products(skip: $skip, first: $first, orderBy: price_DESC) {
       id
       title
       description
@@ -13,9 +15,19 @@ export const ALL_PRODUCTS = gql`
   }
 `;
 
-const ProductsContainer = ({ ProductItm }) => {
+const ProductsContainer = ({
+  ProductItm,
+  router: {
+    query: { page = 1 }
+  }
+}) => {
   return (
-    <Query query={ALL_PRODUCTS}>
+    <Query
+      query={ALL_PRODUCTS}
+      variables={{
+        skip: page * perPage - perPage
+      }}
+    >
       {({ data, error, loading }) => {
         if (error) return error.message;
         if (loading) return "Loading...";
@@ -27,4 +39,4 @@ const ProductsContainer = ({ ProductItm }) => {
   );
 };
 
-export default ProductsContainer;
+export default withRouter(ProductsContainer);

@@ -59,7 +59,6 @@ const CREATE_PRODUCT = gql`
   }
 `;
 
-
 // TODO: IMAGE type upload or string
 const UPDATE_PRODUCT = gql`
   mutation UPDATE_PRODUCT(
@@ -131,22 +130,21 @@ const ProductForm = ({ client, productData }) => {
         description,
         price,
         image
-      }
+      };
       if (productData) {
-        params.id = productData.id
+        params.id = productData.id;
       }
 
       const { data } = await client.mutate({
-        mutation: params.id ? UPDATE_PRODUCT: CREATE_PRODUCT,
+        mutation: params.id ? UPDATE_PRODUCT : CREATE_PRODUCT,
         variables: params
       });
-      console.log(data)
+
       setStatus({
         ...requestStatus,
-        sucess: 'true'
+        sucess: "true"
       });
       setSubmitting(false);
-
     } catch (err) {
       console.error(err);
       setSubmitting(false);

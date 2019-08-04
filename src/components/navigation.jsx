@@ -1,5 +1,6 @@
 import Link from "next/link";
 import styled from "styled-components";
+import User from "components/User";
 
 const StyledNav = styled.nav`
   display: flex;
@@ -10,7 +11,7 @@ const StyledNav = styled.nav`
 `;
 
 const StyledLink = styled.a`
-  color: ${({theme}) => theme.colors.dark};
+  color: ${({ theme }) => theme.colors.dark};
   cursor: pointer;
   display: block;
   margin: 0 10px;
@@ -18,26 +19,47 @@ const StyledLink = styled.a`
   text-transform: uppercase;
 `;
 
+const navOptions = [
+  {
+    href: "/category",
+    title: "Categories"
+  },
+  {
+    href: "/search",
+    title: "Search"
+  },
+  {
+    href: "/profile",
+    title: "Profile"
+  },
+  {
+    href: "/cart",
+    title: "Cart"
+  },
+  {
+    href: "/admin",
+    title: "Admin"
+  },
+  {
+    href: "/sign-in",
+    title: "Sign in"
+  },
+  {
+    href: "/sign-up",
+    title: "sign-up"
+  }
+];
+
 const Navigation = () => (
   <StyledNav alignItems="center">
-    <Link href="/">
-      <StyledLink>Home</StyledLink>
-    </Link>
-    <Link href="/category">
-      <StyledLink>categories</StyledLink>
-    </Link>
-    <Link href="/search">
-      <StyledLink>search</StyledLink>
-    </Link>
-    <Link href="/profile">
-      <StyledLink>profile</StyledLink>
-    </Link>
-    <Link href="/cart">
-      <StyledLink>cart</StyledLink>
-    </Link>
-    <Link href="/admin">
-      <StyledLink>admin</StyledLink>
-    </Link>
+    {navOptions.map(lnk => {
+      return (
+        <Link href={lnk.href} key={lnk.title}>
+          <StyledLink>{lnk.title}</StyledLink>
+        </Link>
+      );
+    })}
+    <User>{({ me }) => (me ? me.name : null)}</User>
   </StyledNav>
 );
 

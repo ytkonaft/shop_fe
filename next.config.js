@@ -14,7 +14,8 @@ const NextConfig = {
         styles: path.resolve(__dirname, "src/styles/"),
         hooks: path.resolve(__dirname, "src/hooks/"),
         seo: path.resolve(__dirname, "src/seo/"),
-        views: path.resolve(__dirname, "src/views/")
+        views: path.resolve(__dirname, "src/views/"),
+        config: path.resolve(__dirname, "config.js")
       },
       extensions: [".js", ".jsx", ".mjs", ".css", ".graphql"]
     };
@@ -34,17 +35,17 @@ const NextConfig = {
       },
       {
         test: /\.(js|jsx)$/,
-        loader: 'stylelint-custom-processor-loader',
-        exclude: /node_modules/,
+        loader: "stylelint-custom-processor-loader",
+        exclude: /node_modules/
       },
       {
         test: /\.mjs$/,
         include: /node_modules/,
         type: "javascript/auto"
       }
-    ]; 
+    ];
 
-    return config; 
+    return config;
   }
 };
 
