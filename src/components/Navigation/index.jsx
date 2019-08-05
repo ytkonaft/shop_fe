@@ -1,5 +1,5 @@
 import Link from "next/link";
-import styled from "styled-components";
+import styled, {css} from "styled-components";
 import User from "components/User";
 
 const StyledNav = styled.nav`
@@ -10,13 +10,22 @@ const StyledNav = styled.nav`
   align-items: center;
 `;
 
-const StyledLink = styled.a`
-  color: ${({ theme }) => theme.colors.dark};
-  cursor: pointer;
+const commonStyles = css`
   display: block;
   margin: 0 10px;
   font-size: ${({ theme: { ms } }) => ms(1.2)};
+  color: ${({ theme }) => theme.colors.dark};
+`
+
+const StyledLink = styled.a`
+  ${commonStyles}
+  cursor: pointer;
   text-transform: uppercase;
+`;
+
+const StyledSpan = styled.span`
+  ${commonStyles}
+  text-transform: capitalize;
 `;
 
 const generalNav = [
@@ -72,7 +81,7 @@ const Navigation = () => (
           {me && (
             <>
               {me.permissions.includes("ADMIN") && createLnk(adminLink)}
-              {me.name}
+              <StyledSpan>{me.name}</StyledSpan>
             </>
           )}
         </>

@@ -5,6 +5,7 @@ import gql from "graphql-tag";
 import { Button } from "components/styled/Button";
 import styled from "styled-components";
 import { CURRENT_USER } from "components/User";
+import Icon from "components/Icon";
 
 const SIGNUP = gql`
   mutation SIGNUP($email: String!, $password: String!, $name: String) {
@@ -103,8 +104,14 @@ const AuthForm = ({ client, isSignUp }) => {
                   active={true}
                   disabled={isSubmitting}
                 >
-                  {isSubmitting ? "Sending..." : SubmitText}
-                </Button>
+                  {isSubmitting ? (
+                    <>
+                    Sending
+                    <Icon type="spinner" size={2} fill="#fff"/>
+                    </>
+                  ) : SubmitText}
+                </Button>             
+
               </div>
             </Form>
           );

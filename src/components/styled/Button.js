@@ -67,14 +67,24 @@ const ButtonStyle = css`
   border: none;
   padding: 10px 15px;
   cursor: pointer;
+  display: flex;
   border-radius: 5px;
   vertical-align: top;
-  display: inline-block;
+  align-items: center;
   font-size: ${({ theme: { ms } }) => ms(2)};
   line-height: ${({ theme: { ms } }) => ms(2)};
   transition: all 0.3s ease;
   margin: 0 ${({ theme: { ms } }) => ms(-7)};
   ${({btnType, theme}) => GetBackground(btnType, theme)};
+  
+  &:disabled {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  i {
+    margin-left: ${({ theme: { ms } }) => ms(-2)};
+  }
 `
 
 export const Button = styled.button`
