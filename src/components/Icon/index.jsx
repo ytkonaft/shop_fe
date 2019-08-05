@@ -1,4 +1,4 @@
-import styled, {keyframes} from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 const sizes = {
   superLg: "super-lg",
@@ -33,7 +33,6 @@ const iconSizeCalc = (size = 0, theme) => {
   }
 };
 
-
 const I = styled.i`
   display: inline-block;
 `;
@@ -53,18 +52,25 @@ const Svg = styled.svg`
   }
 `;
 
+const rotate = keyframes`
+  to {
+      transform: rotate(360deg)
+  }
+`;
 const spin = keyframes`
+
   50% {
     stroke-dashoffset: 0;
   }
 
   100% {
-    stroke-dashoffset: -20;
+    stroke-dashoffset: 16;
   }
+
 `;
 
-
 const Spin = styled(Svg)`
+  animation: ${rotate} 4s linear infinite;
   path {
     fill: none;
     stroke-width: 0.85;
@@ -72,11 +78,12 @@ const Spin = styled(Svg)`
     stroke-linejoin: miter;
     stroke-miterlimit: 4;
     stroke-opacity: 1;
-    stroke-dasharray: 20;
-    stroke-dashoffset: 20;
-    animation: ${spin} 1.3s ease-in infinite;
+    stroke-dasharray: 16;
+    stroke-dashoffset: -16;
+    transform-origin: 50% 50%;
+    animation: ${spin} 2.5s ease infinite;
   }
-`
+`;
 
 const getArrowIconPath = type => {
   switch (type) {
@@ -105,15 +112,22 @@ const Icon = ({ fill = "#333", className, type, size = sizes.sm }) => {
         </I>
       );
 
-      case types.spinner:
-        return (
-          <I className={className}>
-            <Spin size={size} viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" spin={true}>
-              <path stroke={fill} d="M 3.9923386,0.80497222 C 2.0967349,0.80672122 0.81188242,2.091549 0.81336528,3.9839389 c 0.001483,1.89239 1.28634842,3.195022 3.17897332,3.1967512 1.8926249,0.00173 3.1952473,-1.3009026 3.196733,-3.1967512 0.00149,-1.8958486 -1.3011292,-3.18071558 -3.196733,-3.17896668 z" />
-            </Spin>
-          </I>
-        );
-
+    case types.spinner:
+      return (
+        <I className={className}>
+          <Spin
+            size={size}
+            viewBox="0 0 8 8"
+            xmlns="http://www.w3.org/2000/svg"
+            spin={true}
+          >
+            <path
+              stroke={fill}
+              d="m 3.9923735,1.0335419 c -1.9479848,0 -2.9547813,1.6191976 -2.948732,3.0126121 0.00605,1.3934145 1.0007472,3.0177341 2.948732,3.0177341 1.9479847,0 2.9297096,-1.6283146 2.9353337,-3.0177341 0.00562,-1.3894195 -0.987349,-3.0126121 -2.9353337,-3.0126121 z"
+            />
+          </Spin>
+        </I>
+      );
   }
 };
 

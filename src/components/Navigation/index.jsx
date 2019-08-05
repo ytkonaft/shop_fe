@@ -1,6 +1,8 @@
 import Link from "next/link";
-import styled, {css} from "styled-components";
+import styled from "styled-components";
 import User from "components/User";
+import UserMenu from "./UserMenu";
+import { commonStyles } from "./styles";
 
 const StyledNav = styled.nav`
   display: flex;
@@ -10,22 +12,10 @@ const StyledNav = styled.nav`
   align-items: center;
 `;
 
-const commonStyles = css`
-  display: block;
-  margin: 0 10px;
-  font-size: ${({ theme: { ms } }) => ms(1.2)};
-  color: ${({ theme }) => theme.colors.dark};
-`
-
 const StyledLink = styled.a`
   ${commonStyles}
   cursor: pointer;
   text-transform: uppercase;
-`;
-
-const StyledSpan = styled.span`
-  ${commonStyles}
-  text-transform: capitalize;
 `;
 
 const generalNav = [
@@ -71,23 +61,25 @@ const createLnk = lnk => {
   );
 };
 
-const Navigation = () => (
-  <StyledNav alignItems="center">
-    {generalNav.map(createLnk)}
-    <User>
-      {({ me }) => (
-        <>
-          {!me && authLinks.map(createLnk)}
-          {me && (
-            <>
-              {me.permissions.includes("ADMIN") && createLnk(adminLink)}
-              <StyledSpan>{me.name}</StyledSpan>
-            </>
-          )}
-        </>
-      )}
-    </User>
-  </StyledNav>
-);
+const Navigation = () => {
+  return (
+    <StyledNav alignItems="center">
+      {generalNav.map(createLnk)}
+      <User>
+        {({ me }) => (
+          <>
+            {!me && authLinks.map(createLnk)}
+            {me && (
+              <>
+                {me.permissions.includes("ADMIN") && createLnk(adminLink)}
+                <UserMenu me={me} />
+              </>
+            )}
+          </>
+        )}
+      </User>
+    </StyledNav>
+  );
+};
 
 export default Navigation;

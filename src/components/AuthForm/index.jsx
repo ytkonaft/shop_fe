@@ -106,12 +106,13 @@ const AuthForm = ({ client, isSignUp }) => {
                 >
                   {isSubmitting ? (
                     <>
-                    Sending
-                    <Icon type="spinner" size={2} fill="#fff"/>
+                      Sending
+                      <Icon type="spinner" size={2} fill="#fff" />
                     </>
-                  ) : SubmitText}
-                </Button>             
-
+                  ) : (
+                    SubmitText
+                  )}
+                </Button>
               </div>
             </Form>
           );
