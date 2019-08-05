@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
+import useOnClickOutside from "use-onclickoutside";
 import styled from "styled-components";
 import Dropdown from "components/Dropdown";
 import Icon from "components/Icon";
@@ -17,6 +18,11 @@ const StyledButton = styled.button`
   text-transform: capitalize;
   cursor: pointer;
   margin-right: 0;
+
+  i {
+    transition: transform 0.3s ease;
+    transform: rotate(${({ isActive }) => (isActive ? -180 : 0)}deg);
+  }
 `;
 
 const StyledAnimatedDropdown = styled(Dropdown)`
@@ -29,14 +35,23 @@ const StyledAnimatedDropdown = styled(Dropdown)`
 
 const UserMenu = ({ me }) => {
   const [isOpen, openDropMenu] = useState(false);
-
+  const dropdownRef = useRef(null);
   const toggleMenu = () => {
     openDropMenu(!isOpen);
   };
+
+  useOnClickOutside(dropdownRef, () => {
+    if (!isOpen) {
+      return;
+    }
+
+    openDropMenu(false);
+  });
+
   return (
-    <MenuWrp>
-      <StyledButton onClick={toggleMenu}>
-        {me.name} <Icon type="arrow-down" size="lg" />
+    <MenuWrp ref={dropdownRef}>
+      <StyledButton onClick={toggleMenu} isActive={isOpen}>
+        {me.name} <Icon type="arrow-down" size="md" />
       </StyledButton>
       <StyledAnimatedDropdown active={isOpen}>
         asdfasfdasfasfd
