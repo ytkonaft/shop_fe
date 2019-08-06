@@ -1,8 +1,7 @@
-import Link from "next/link";
 import styled from "styled-components";
 import User from "components/User";
 import UserMenu from "./UserMenu";
-import { commonStyles } from "./styles";
+import NavLink from "./NavLink";
 
 const StyledNav = styled.nav`
   display: flex;
@@ -10,12 +9,6 @@ const StyledNav = styled.nav`
   height: 100%;
   justify-content: flex-end;
   align-items: center;
-`;
-
-const StyledLink = styled.a`
-  ${commonStyles}
-  cursor: pointer;
-  text-transform: uppercase;
 `;
 
 const generalNav = [
@@ -37,10 +30,6 @@ const generalNav = [
   }
 ];
 
-const adminLink = {
-  href: "/admin",
-  title: "Admin"
-};
 
 const authLinks = [
   {
@@ -53,31 +42,18 @@ const authLinks = [
   }
 ];
 
-const createLnk = lnk => {
-  return (
-    <Link href={lnk.href} key={lnk.title}>
-      <StyledLink>{lnk.title}</StyledLink>
-    </Link>
-  );
-};
-
 const Navigation = () => {
   return (
     <StyledNav alignItems="center">
-      {generalNav.map(createLnk)}
+      {generalNav.map((lnk, indx) => <NavLink link={lnk} key={indx}/>)}
       <User>
         {({ me }) => (
           <>
-            {!me && authLinks.map(createLnk)}
-            {me && (
-              <>
-                {me.permissions.includes("ADMIN") && createLnk(adminLink)}
-                <UserMenu me={me} />
-              </>
-            )}
+            {!me && authLinks.map((lnk, indx) => <NavLink link={lnk} key={indx}/>)}
+            {me && ( <UserMenu me={me} /> )}
           </>
         )}
-      </User>
+      </User> 
     </StyledNav>
   );
 };

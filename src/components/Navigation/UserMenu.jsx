@@ -3,7 +3,10 @@ import useOnClickOutside from "use-onclickoutside";
 import styled from "styled-components";
 import Dropdown from "components/Dropdown";
 import Icon from "components/Icon";
+import SignOut from "components/SignOut"
+import NavLink from "./NavLink";
 import { commonStyles } from "./styles";
+
 
 const MenuWrp = styled.div`
   display: inline-block;
@@ -33,6 +36,12 @@ const StyledAnimatedDropdown = styled(Dropdown)`
   min-width: 200px;
 `;
 
+
+const adminLink = {
+  href: "/admin",
+  title: "Admin"
+};
+
 const UserMenu = ({ me }) => {
   const [isOpen, openDropMenu] = useState(false);
   const dropdownRef = useRef(null);
@@ -54,7 +63,8 @@ const UserMenu = ({ me }) => {
         {me.name} <Icon type="arrow-down" size="md" />
       </StyledButton>
       <StyledAnimatedDropdown active={isOpen}>
-        asdfasfdasfasfd
+        {me.permissions.includes("ADMIN") && <NavLink link={adminLink}/>}
+        <SignOut/>
       </StyledAnimatedDropdown>
     </MenuWrp>
   );

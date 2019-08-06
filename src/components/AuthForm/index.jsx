@@ -19,7 +19,7 @@ const SIGNUP = gql`
 
 const SIGNIN = gql`
   mutation SIGNIN($email: String!, $password: String!) {
-    signUp(email: $email, password: $password) {
+    signIn(email: $email, password: $password) {
       id
       email
       name
@@ -40,19 +40,33 @@ const validate = values => {
   return errors;
 };
 
-const initialSignUpValues = {
+const initSignUpValues = {
   name: "",
   email: "",
   password: ""
 };
 
+const initSignInValues = {
+  email: "",
+  password: ""
+};
+
 const AuthForm = ({ client, isSignUp }) => {
-  const handleSubmit = async (values, { setSubmitting }) => {
+  const handleSubmit = (values, { setSubmitting }) => {
     setSubmitting(true);
+    if (isSignUp) {
+      signUp(values, setSubmitting)
+    }else {
+      signIn(values, setSubmitting)
+    }
+
+  };
+
+  const signUp = async (formData, setSubmitting) => {
     try {
       const { data } = await client.mutate({
-        mutation: isSignUp ? SIGNUP : SIGNIN,
-        variables: values,
+        mutation: SIGNUP,
+        variables: formData,
         refetchQueries: [
           {
             query: CURRENT_USER
@@ -66,14 +80,35 @@ const AuthForm = ({ client, isSignUp }) => {
       console.log(err);
       setSubmitting(false);
     }
-  };
+  }
+
+  const signIn = async (formData, setSubmitting) => {
+    try {
+      const { data } = await client.mutate({
+        mutation: SIGNIN,
+        variables: formData,
+        refetchQueries: [
+          {
+            query: CURRENT_USER
+          }
+        ]
+      });
+
+      console.log(data);
+      setSubmitting(false);
+    } catch (err) {
+      console.log(err);
+      setSubmitting(false);
+    }
+  }
 
   const SubmitText = isSignUp ? "Sign up" : "Sign in";
+  const initValues = isSignUp ? initSignUpValues : initSignInValues
 
   return (
     <div>
       <Formik
-        initialValues={initialSignUpValues}
+        initialValues={initValues}
         validate={validate}
         onSubmit={handleSubmit}
       >
