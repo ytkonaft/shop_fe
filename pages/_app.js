@@ -2,7 +2,8 @@ import App, { Container } from "next/app";
 import { ThemeProvider } from "styled-components";
 import { ApolloProvider } from "react-apollo";
 import { MainLayout } from "layouts";
-import Header from "components/Header/";
+import Header from "components/Header";
+import ErrorBoundary from "components/ErrorBoundary";
 import Title from "seo/Title";
 import withData from "src/client";
 import Theme from "styles/theme/";
@@ -18,10 +19,12 @@ class ShopApp extends App {
           <Title title={"azazazaz"} />
           <GlobalStyles />
           <ThemeProvider theme={Theme}>
-            <MainLayout>
-              <Header />
-              <Component {...pageProps} />
-            </MainLayout>
+            <ErrorBoundary>
+              <MainLayout>
+                <Header />
+                <Component {...pageProps} />
+              </MainLayout>
+            </ErrorBoundary>
           </ThemeProvider>
         </ApolloProvider>
       </Container>
