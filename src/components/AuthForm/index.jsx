@@ -1,6 +1,7 @@
 // import { useState, useEffect, memo } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { withApollo } from "react-apollo";
+import Router from 'next/router'
 import gql from "graphql-tag";
 import { Button } from "components/styled/Button";
 import styled from "styled-components";
@@ -52,55 +53,27 @@ const initSignInValues = {
 };
 
 const AuthForm = ({ client, isSignUp }) => {
-  const handleSubmit = (values, { setSubmitting }) => {
+  const handleSubmit = async (values, { setSubmitting }) => {
     setSubmitting(true);
-    if (isSignUp) {
-      signUp(values, setSubmitting)
-    }else {
-      signIn(values, setSubmitting)
+    try {
+      await client.mutate({
+        mutation: isSignUp ? SIGNUP : SIGNIN,
+        variables: values,
+        refetchQueries: [
+          {
+            query: CURRENT_USER
+          }
+        ]
+      });
+
+      setSubmitting(false);
+      Router.push(`/`)
+    } catch (err) {
+      console.log(err);
+      setSubmitting(false);
     }
 
   };
-
-  const signUp = async (formData, setSubmitting) => {
-    try {
-      const { data } = await client.mutate({
-        mutation: SIGNUP,
-        variables: formData,
-        refetchQueries: [
-          {
-            query: CURRENT_USER
-          }
-        ]
-      });
-
-      console.log(data);
-      setSubmitting(false);
-    } catch (err) {
-      console.log(err);
-      setSubmitting(false);
-    }
-  }
-
-  const signIn = async (formData, setSubmitting) => {
-    try {
-      const { data } = await client.mutate({
-        mutation: SIGNIN,
-        variables: formData,
-        refetchQueries: [
-          {
-            query: CURRENT_USER
-          }
-        ]
-      });
-
-      console.log(data);
-      setSubmitting(false);
-    } catch (err) {
-      console.log(err);
-      setSubmitting(false);
-    }
-  }
 
   const SubmitText = isSignUp ? "Sign up" : "Sign in";
   const initValues = isSignUp ? initSignUpValues : initSignInValues

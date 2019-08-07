@@ -11,9 +11,9 @@ const StyledContainer = styled(Container)`
 const Home = () => {
   return (
     <StyledContainer gutterOff>
-      <Pagination />
+      <Pagination pagination={false}/>
       <ProductsGrid />
-      <Pagination />
+      <Pagination pageInfo={false}/>
     </StyledContainer>
   );
 };

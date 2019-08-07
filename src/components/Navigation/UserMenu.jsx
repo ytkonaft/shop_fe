@@ -28,6 +28,15 @@ const StyledButton = styled.button`
   }
 `;
 
+const StyledSignOut = styled.button`
+ ${commonStyles};
+  border: none;
+  background: none;
+  text-align: left;
+  display: flex;
+  cursor: pointer
+`
+
 const StyledAnimatedDropdown = styled(Dropdown)`
   position: absolute;
   top: 100%;
@@ -64,7 +73,7 @@ const UserMenu = ({ me }) => {
       </StyledButton>
       <StyledAnimatedDropdown active={isOpen}>
         {me.permissions.includes("ADMIN") && <NavLink link={adminLink}/>}
-        <SignOut/>
+        <SignOut Button={StyledSignOut}/>
       </StyledAnimatedDropdown>
     </MenuWrp>
   );
