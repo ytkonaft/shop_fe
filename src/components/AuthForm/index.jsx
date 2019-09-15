@@ -1,13 +1,11 @@
 // import { useState, useEffect, memo } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { withApollo } from "react-apollo";
-import Router from 'next/router'
+import Router from "next/router";
 import gql from "graphql-tag";
-import { Button } from "components/styled/Button";
+import Button from "components/Button";
 import styled from "styled-components";
 import { CURRENT_USER } from "components/User";
-import Icon from "components/Icon";
-
 const SIGNUP = gql`
   mutation SIGNUP($email: String!, $password: String!, $name: String) {
     signUp(email: $email, password: $password, name: $name) {
@@ -67,16 +65,15 @@ const AuthForm = ({ client, isSignUp }) => {
       });
 
       setSubmitting(false);
-      Router.push(`/`)
+      Router.push(`/`);
     } catch (err) {
       console.log(err);
       setSubmitting(false);
     }
-
   };
 
   const SubmitText = isSignUp ? "Sign up" : "Sign in";
-  const initValues = isSignUp ? initSignUpValues : initSignInValues
+  const initValues = isSignUp ? initSignUpValues : initSignInValues;
 
   return (
     <div>
@@ -107,20 +104,13 @@ const AuthForm = ({ client, isSignUp }) => {
               </div>
               <div>
                 <Button
-                  btnType="default"
                   type="submit"
-                  active={true}
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? (
-                    <>
-                      Sending
-                      <Icon type="spinner" size={2} fill="#fff" />
-                    </>
-                  ) : (
-                    SubmitText
-                  )}
-                </Button>
+                  btnType="default"
+                  isActive={true}
+                  isDisabled={isSubmitting}
+                  isLoading={isSubmitting}
+                  text={SubmitText}
+                />
               </div>
             </Form>
           );

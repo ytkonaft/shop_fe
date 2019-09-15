@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Link from "next/link";
 import { Container, Row, Col } from "styles/grid";
 import Card from "components/styled/Card";
 import AuthForm from "components/AuthForm";
@@ -24,6 +25,9 @@ const SignUp = () => {
           </Col>
           <Col col={{ md: 12 }}>
             <AuthForm />
+            <Link href="/forgot-password">
+              <a>Forgot the password?</a>
+            </Link>
           </Col>
         </Row>
       </AuthWrp>
