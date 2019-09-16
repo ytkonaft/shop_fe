@@ -4,6 +4,7 @@ import { withApollo } from "react-apollo";
 // import Router from "next/router";
 import gql from "graphql-tag";
 import { Container, Row, Col } from "styles/grid";
+import { CURRENT_USER } from "components/User";
 import Card from "components/styled/Card";
 import Button from "components/Button";
 
@@ -48,7 +49,7 @@ const initValues = {
   confirm: ""
 };
 
-const ResetPassword = ({ client }) => {
+const ResetPassword = ({ client, token }) => {
   const handleSubmit = async (values, { setSubmitting }) => {
     setSubmitting(true);
     try {
@@ -56,12 +57,17 @@ const ResetPassword = ({ client }) => {
         mutation: RESET_PASSWORD,
         variables: {
           ...values,
-          resetToken: 12333
-        }
+          resetToken: token
+        },
+        refetchQueries: [
+          {
+            query: CURRENT_USER
+          }
+        ]
       });
       console.log(data);
       setSubmitting(false);
-      //   Router.push(`/`);
+      Router.push(`/`);
     } catch (err) {
       console.log(err);
       setSubmitting(false);
@@ -109,6 +115,14 @@ const ResetPassword = ({ client }) => {
       </AuthWrp>
     </StyledContainer>
   );
+};
+
+ResetPassword.getInitialProps = props => {
+  if (!props.query.token) {
+    // Router.push("/");
+    return {};
+  }
+  return { token: props.query.token };
 };
 
 export default withApollo(ResetPassword);
