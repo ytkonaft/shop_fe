@@ -1,4 +1,4 @@
-// import Router from "next/router";
+import Router from "next/router";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import ProductView from "views/Product";
@@ -28,9 +28,16 @@ const ProductPage = ({ id }) => {
   );
 };
 
-ProductPage.getInitialProps = async ({ query }) => {
+ProductPage.getInitialProps = async ({ query, res }) => {
   if (!query.id) {
-    // Router.push("/");
+    if (res) {
+      res.writeHead(302, {
+        Location: "/"
+      });
+      res.end();
+    } else {
+      Router.push("/");
+    }
     return {};
   }
   return { id: query.id };

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { withApollo } from "react-apollo";
-// import Router from "next/router";
+import Router from "next/router";
 import gql from "graphql-tag";
 import { Container, Row, Col } from "styles/grid";
 import { CURRENT_USER } from "components/User";
@@ -117,12 +117,20 @@ const ResetPassword = ({ client, token }) => {
   );
 };
 
-ResetPassword.getInitialProps = props => {
-  if (!props.query.token) {
-    // Router.push("/");
+ResetPassword.getInitialProps = ({ query, res }) => {
+  if (!query.token) {
+    if (res) {
+      res.writeHead(302, {
+        Location: "/"
+      });
+      res.end();
+    } else {
+      Router.push("/");
+    }
     return {};
+  } else {
+    return { token: query.token };
   }
-  return { token: props.query.token };
 };
 
 export default withApollo(ResetPassword);
